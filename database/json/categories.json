@@ -1,0 +1,38 @@
+[
+    {
+        "title": "Running",
+        "description": "Performance shoes built for speed and endurance",
+        "slug": "running",
+        "image": "img_7.jpg"
+    },
+    {
+        "title": "Sneakers",
+        "description": "Street-ready comfort designed for everyday movement.",
+        "slug": "sneakers",
+        "image": "img_2.jpg"
+    },
+    {
+        "title": "Boots",
+        "description": "Rugged durability crafted to conquer any terrain.",
+        "slug": "boots",
+        "image": "img_3.jpg"
+    },
+    {
+        "title": "Casual",
+        "description": "Effortless style that seamlessly bridges work and play.",
+        "slug": "casual",
+        "image": "img_5.jpg"
+    },
+    {
+        "title": "Basketball",
+        "description": "High-flying performance engineered for ultimate court dominance.",
+        "slug": "basketball",
+        "image": "img_1.jpg"
+    },
+    {
+        "title": "Sandals",
+        "description": "Breathable freedom made for laid-back, sun-soaked days.",
+        "slug": "sandals",
+        "image": "img_6.jpg"
+    }
+]

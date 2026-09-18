@@ -1,0 +1,167 @@
+[
+    {
+        "category_id": 1,
+        "name": "Velocity Runner X1",
+        "slug": "velocity-runner-x1",
+        "description": "Lightweight running shoes engineered for speed, comfort, and long-distance performance.",
+        "price": 4785,
+        "total_discount": 15,
+        "badge": "Best Seller",
+        "is_new": false,
+        "status": true
+    },
+    {
+        "category_id": 1,
+        "name": "Aero Sprint Pro",
+        "slug": "aero-sprint-pro",
+        "description": "Responsive performance running shoes with breathable mesh and cushioned support.",
+        "price": 6320,
+        "total_discount": null,
+        "badge": null,
+        "is_new": true,
+        "status": true
+    },
+    {
+        "category_id": 1,
+        "name": "Endurance Flow",
+        "slug": "endurance-flow",
+        "description": "Comfort-focused running shoes designed for daily training and extended road sessions.",
+        "price": 2940,
+        "total_discount": 10,
+        "badge": "Popular",
+        "is_new": false,
+        "status": true
+    },
+    {
+        "category_id": 2,
+        "name": "Urban Flex 90",
+        "slug": "urban-flex-90",
+        "description": "Modern everyday sneakers combining street style with lightweight all-day comfort.",
+        "price": 5175,
+        "total_discount": 20,
+        "badge": "Best Seller",
+        "is_new": false,
+        "status": true
+    },
+    {
+        "category_id": 2,
+        "name": "Street Nova",
+        "slug": "street-nova",
+        "description": "Clean contemporary sneakers designed for casual outfits and everyday city movement.",
+        "price": 4130,
+        "total_discount": null,
+        "badge": "Trending",
+        "is_new": true,
+        "status": true
+    },
+    {
+        "category_id": 2,
+        "name": "Classic Court Low",
+        "slug": "classic-court-low",
+        "description": "Minimal low-top sneakers with a timeless silhouette and comfortable everyday fit.",
+        "price": 1875,
+        "total_discount": 15,
+        "badge": null,
+        "is_new": false,
+        "status": true
+    },
+    {
+        "category_id": 3,
+        "name": "Mountain Trek Boots",
+        "slug": "mountain-trek-boots",
+        "description": "Rugged boots built with durable materials for hiking, trails, and demanding outdoor conditions.",
+        "price": 8450,
+        "total_discount": 25,
+        "badge": "Best Seller",
+        "is_new": false,
+        "status": true
+    },
+    {
+        "category_id": 3,
+        "name": "Urban Ranger Boots",
+        "slug": "urban-ranger-boots",
+        "description": "Durable everyday boots combining rugged construction with a refined urban appearance.",
+        "price": 3560,
+        "total_discount": null,
+        "badge": null,
+        "is_new": true,
+        "status": true
+    },
+    {
+        "category_id": 3,
+        "name": "Trail Guard Leather Boots",
+        "slug": "trail-guard-leather-boots",
+        "description": "Premium-inspired leather boots offering dependable protection and comfortable outdoor wear.",
+        "price": 4925,
+        "total_discount": 10,
+        "badge": "Premium",
+        "is_new": false,
+        "status": true
+    },
+    {
+        "category_id": 4,
+        "name": "Everyday Ease",
+        "slug": "everyday-ease",
+        "description": "Versatile casual shoes designed for relaxed everyday wear with soft cushioning and easy styling.",
+        "price": 2680,
+        "total_discount": 15,
+        "badge": "Popular",
+        "is_new": false,
+        "status": true
+    },
+    {
+        "category_id": 4,
+        "name": "Comfort Walk",
+        "slug": "comfort-walk",
+        "description": "Soft and lightweight casual shoes created for comfortable walking throughout the day.",
+        "price": 3245,
+        "total_discount": null,
+        "badge": null,
+        "is_new": true,
+        "status": true
+    },
+    {
+        "category_id": 5,
+        "name": "Court Force Elite",
+        "slug": "court-force-elite",
+        "description": "High-performance basketball shoes designed for explosive movement, stability, and court grip.",
+        "price": 4390,
+        "total_discount": 20,
+        "badge": "Best Seller",
+        "is_new": false,
+        "status": true
+    },
+    {
+        "category_id": 5,
+        "name": "Jump Max Pro",
+        "slug": "jump-max-pro",
+        "description": "Supportive basketball shoes with responsive cushioning for fast cuts and powerful jumps.",
+        "price": 1560,
+        "total_discount": null,
+        "badge": "Trending",
+        "is_new": true,
+        "status": true
+    },
+    {
+        "category_id": 6,
+        "name": "Breeze Comfort Sandals",
+        "slug": "breeze-comfort-sandals",
+        "description": "Lightweight open sandals designed for breathable comfort during warm-weather days.",
+        "price": 2215,
+        "total_discount": 15,
+        "badge": null,
+        "is_new": false,
+        "status": true
+    },
+    {
+        "category_id": 6,
+        "name": "Summer Walk Sandals",
+        "slug": "summer-walk-sandals",
+        "description": "Relaxed everyday sandals offering comfortable support and an easy summer-ready design.",
+        "price": 3895,
+        "total_discount": null,
+        "badge": "Popular",
+        "is_new": false,
+        "status": true
+    }
+]

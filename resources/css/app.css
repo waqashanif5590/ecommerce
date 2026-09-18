@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.feature-collection .image:hover .action-buttons,
+.new-arrivals .image:hover .action-buttons {
+	visibility: visible;
+	transform: translateY(0);
+	opacity: 1;
+}
+
+.feature-collection .image,
+.new-arrivals .image {
+	position: relative;
+}
+
+.categories .card {
+	transition: transform 300ms ease, box-shadow 300ms ease;
+}
+
+.categories .card:hover {
+	transform: translateY(-0.5rem);
+	box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.3);
+}
+
+@keyframes colorChange {
+
+	0%,
+	100% {
+		background-color: #22a050;
+	}
+
+	50% {
+		background-color: #15803d;
+	}
+}
+
+@keyframes background-blink {
+
+	0%,
+	100% {
+		background: rgba(2, 255, 2, 15%);
+	}
+
+	50% {
+		background: rgba(2, 255, 2, 25%);
+	}
+}
+
+.background-blink {
+	animation: background-blink 2s infinite;
+}
+
+.animate-custom-color {
+	animation: colorChange 2s infinite;
+}
+
+.action-buttons~.action-buttons {
+	display: none;
+}
+
+@keyframes float {
+
+	0%,
+	100% {
+		transform: translateY(0);
+	}
+
+	50% {
+		transform: translateY(20px);
+	}
+}
+
+.image-float {
+	animation: float 2s ease-in-out infinite;
+}
+
+@keyframes blinking {
+
+	0%,
+	100% {
+		color: rgb(109, 0, 0);
+	}
+
+	50% {
+		color: white;
+	}
+}
+
+.blinking {
+	animation-name: blinking;
+	animation-duration: 1s;
+	animation-timing-function: steps(1);
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+	animation-fill-mode: forwards;
+}

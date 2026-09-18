@@ -1,0 +1,32 @@
+[
+    {
+        "user_id": 1,
+        "rating": 5,
+        "comment": "Great shopping experience. The website is easy to navigate and finding the right shoes was very simple.",
+        "status": 1
+    },
+    {
+        "user_id": 2,
+        "rating": 4,
+        "comment": "I really liked the overall experience. The product information was clear and the ordering process was smooth.",
+        "status": 1
+    },
+    {
+        "user_id": 3,
+        "rating": 5,
+        "comment": "Excellent service and a very clean website. I had no trouble placing my order.",
+        "status": 1
+    },
+    {
+        "user_id": 4,
+        "rating": 4,
+        "comment": "The website looks professional and works really well on my phone. I would definitely shop here again.",
+        "status": 1
+    },
+    {
+        "user_id": 5,
+        "rating": 5,
+        "comment": "Very happy with my shopping experience. Everything was easy to understand and the checkout process was quick.",
+        "status": 1
+    }
+]

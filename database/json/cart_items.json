@@ -1,0 +1,32 @@
+[
+    {
+        "cart_id": 1,
+        "product_variant_id": 1,
+        "quantity": 2
+    },
+    {
+        "cart_id": 1,
+        "product_variant_id": 5,
+        "quantity": 1
+    },
+    {
+        "cart_id": 2,
+        "product_variant_id": 8,
+        "quantity": 1
+    },
+    {
+        "cart_id": 2,
+        "product_variant_id": 12,
+        "quantity": 2
+    },
+    {
+        "cart_id": 3,
+        "product_variant_id": 15,
+        "quantity": 1
+    },
+    {
+        "cart_id": 3,
+        "product_variant_id": 18,
+        "quantity": 3
+    }
+]
