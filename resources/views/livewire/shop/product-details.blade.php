@@ -38,9 +38,9 @@
                             class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
                             class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
                             class="fa-solid fa-star"></i><span
-                            class="ml-1 text-sm font-semibold text-white">4.9</span></div>
+                            class="ml-1 text-sm font-semibold text-white">{{number_format($product->average_rating,1)}}</span></div>
                     <a href="#reviews"
-                        class="text-sm text-gray-400 underline decoration-gray-700 underline-offset-4 hover:text-orange-400">128
+                        class="text-sm text-gray-400 underline decoration-gray-700 underline-offset-4 hover:text-orange-400">{{count($product->reviews)}}
                         reviews</a>
                     @if($selectedVariant && $selectedVariant->quantity > 0)
                     <span class="text-sm text-green-400">
@@ -54,17 +54,21 @@
                     </span>
                     @endif
                 </div>
-                <div class="mt-6 flex items-end gap-3"><span class="text-3xl font-bold text-white"> {{$product->discounted_price}}</span><span
+                <div class="mt-6 flex items-end gap-3"><span class="text-3xl font-bold text-white"> {{number_format($product->discounted_price)}}</span><span
                         class="text-lg text-gray-500 line-through">{{$product->formatted_price}}</span><span
                         class="rounded bg-orange-500/15 px-2 py-1 text-xs font-bold text-orange-400">Save {{$product->total_discount>0?$product->total_discount:0}} %</span>
                 </div>
                 <p class="mt-5 leading-7 text-gray-400">{{$product->description}}</p>
 
                 <div class="mt-7 border-t border-gray-800 pt-6">
-                    <div class="flex items-center justify-between"><label for="size"
-                            class="font-semibold text-white">Select size</label><a href="#size-guide"
-                            class="text-sm text-orange-400 hover:text-orange-300">Size guide <i
-                                class="fa-solid fa-arrow-up-right-from-square ml-1 text-xs"></i></a></div>
+                    <div class="flex items-center justify-between">
+                        <label for="size"
+                            class="font-semibold text-white">Select size</label>
+                        <a href="#size-guide"
+                            class="text-sm text-orange-400 hover:text-orange-300">Size guide
+                            <i class="fa-solid fa-arrow-up-right-from-square ml-1 text-xs"></i>
+                        </a>
+                    </div>
                     <div id="size" class="mt-3 grid grid-cols-4 gap-2 sm:grid-cols-6">
                         @foreach($product->variants as $variant)
                         <button type="button" wire:click="selectVariant({{$variant->id}})"
@@ -94,12 +98,15 @@
                     class="mt-3 flex h-12 w-full items-center justify-center gap-2 rounded-xl border border-gray-700 font-semibold text-gray-200 transition-colors hover:border-orange-500 hover:text-orange-400"><i
                         class="fa-regular fa-heart"></i>Add to wishlist</button>
                 <div class="mt-8 grid gap-4 border-t border-gray-800 pt-6 text-sm">
-                    <p><i class="fa-solid fa-truck mr-3 w-4 text-orange-400"></i><span
-                            class="font-medium text-gray-200">Free delivery</span> on orders over $75</p>
-                    <p><i class="fa-solid fa-rotate-left mr-3 w-4 text-orange-400"></i><span
-                            class="font-medium text-gray-200">60-day returns</span> with no questions asked</p>
-                    <p><i class="fa-solid fa-shield-halved mr-3 w-4 text-orange-400"></i><span
-                            class="font-medium text-gray-200">Secure payments</span> protected every step</p>
+                    <p class="text-gray-200"><i class="fa-solid fa-truck mr-3 w-4 text-orange-400"></i>
+                        <span class="font-medium">Free delivery</span> on orders over $75
+                    </p>
+                    <p class="text-gray-200"><i class="fa-solid fa-rotate-left mr-3 w-4 text-orange-400"></i>
+                        <span class="font-medium">60-day returns</span> with no questions asked
+                    </p>
+                    <p class="text-gray-200"><i class="fa-solid fa-shield-halved mr-3 w-4 text-orange-400"></i>
+                        <span class="font-medium">Secure payments</span> protected every step
+                    </p>
                 </div>
             </div>
         </div>

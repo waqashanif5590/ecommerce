@@ -1,9 +1,9 @@
  <div class="mt-8 grid gap-8 lg:grid-cols-[0.7fr_1.3fr]">
      <div class="rounded-2xl border border-gray-800 bg-gray-900 p-6">
-         <div class="flex items-end gap-3"><span class="text-5xl font-bold text-white">{{$product->average_rating}}</span><span
+         <div class="flex items-end gap-3"><span class="text-5xl font-bold text-white">{{number_format($product->average_rating,1)}}</span><span
                  class="pb-1 text-sm text-gray-500">out of 5</span></div>
          <div class="mt-3 text-orange-400">@for($i=1; $i<=($product->getAverageRatingAttribute()); $i++)★@endfor</div>
-         <p class="mt-2 text-sm text-gray-500">Based on 128 reviews</p>
+         <p class="mt-2 text-sm text-gray-500">Based on {{count($product->reviews)}} reviews</p>
          <div class="mt-6 space-y-2 text-xs">
              <div class="flex items-center gap-3"><span>5</span>
                  <div class="h-2 flex-1 rounded-full bg-gray-800">
