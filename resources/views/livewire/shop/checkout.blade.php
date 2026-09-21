@@ -8,21 +8,20 @@
     </section>
     <section class="border-y border-gray-800 bg-gray-950 px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
         <div class="mx-auto max-w-7xl">
+            @if($addresses->isNotEmpty())
             <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
                 <div>
                     <p class="text-sm font-medium uppercase tracking-widest text-orange-400">Saved addresses</p>
                     <h2 class="mt-1 text-2xl font-bold text-white sm:text-3xl">Where should we deliver?</h2>
                     <p class="mt-2 max-w-2xl text-sm leading-6 text-gray-400">Choose a saved address to fill in your delivery details, or update the fields below before placing your order.</p>
                 </div>
-                @if($addresses->isNotEmpty())
+
                 <span class="inline-flex w-fit items-center gap-2 rounded-full border border-gray-800 bg-gray-900 px-3 py-1.5 text-xs font-medium text-gray-400">
                     <i class="fa-solid fa-lock text-orange-400" aria-hidden="true"></i>
                     Secure delivery details
                 </span>
-                @endif
             </div>
 
-            @if($addresses->isNotEmpty())
             <div class="mt-7 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
                 @foreach($addresses as $address)
                 <button

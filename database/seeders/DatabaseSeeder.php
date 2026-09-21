@@ -18,24 +18,27 @@ class DatabaseSeeder extends Seeder
 
         // Creating admin user
         User::factory()->create([
-            'name' => 'Admin User',
+            'name' => 'John Doe',
             'email' => 'admin@example.com',
+            'phone' => '123-0091234',
+            'role' => 'admin',
+            'activity_type' => '',
             'password' => 'admin@123',
         ]);
 
         // Creating end users
-        User::factory(10)->create();
+        // User::factory(10)->create();
 
         // Seeding the migrations
-        $this->call([
-            CategorySeeder::class,
-            ProductSeeder::class,
-            ProductVariantSeeder::class,
-            ProductImageSeeder::class,
-            CustomerReviewSeeder::class,
-            CartSeeder::class,
-            CartItemSeeder::class,
-            WishlistSeeder::class,
-        ]);
+        // $this->call([
+        //     CategorySeeder::class,
+        //     ProductSeeder::class,
+        //     ProductVariantSeeder::class,
+        //     ProductImageSeeder::class,
+        //     CustomerReviewSeeder::class,
+        //     CartSeeder::class,
+        //     CartItemSeeder::class,
+        //     WishlistSeeder::class,
+        // ]);
     }
 }
