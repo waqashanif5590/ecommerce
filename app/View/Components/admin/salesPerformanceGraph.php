@@ -1,12 +1,12 @@
 <?php
 
-namespace App\View\Components\User;
+namespace App\View\Components\admin;
 
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class DashboardSidebar extends Component
+class salesPerformanceGraph extends Component
 {
     /**
      * Create a new component instance.
@@ -21,6 +21,6 @@ class DashboardSidebar extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.user.dashboard-sidebar');
+        return view('components.admin.sales-performance-graph');
     }
 }

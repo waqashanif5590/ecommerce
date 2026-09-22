@@ -1,7 +1,7 @@
 <main class="bg-gray-950 px-4 py-10 text-gray-300 sm:px-6 lg:px-8 lg:py-14">
     <div class="mx-auto max-w-7xl">
         <div class="grid gap-8 lg:grid-cols-[250px_minmax(0,1fr)] lg:items-start">
-            <x-user.dashboard-sidebar />
+            <x-user.user-sidebar />
 
             <div class="min-w-0">
     @if($wishlists->isNotEmpty())

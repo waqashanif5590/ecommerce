@@ -8,19 +8,30 @@ use Livewire\Attributes\Layout;
 use Livewire\Component;
 
 #[Layout('layouts.app')]
-class MyOrders extends Component
+class AllOrders extends Component
 {
     public $search = '';
+
     public $status = '';
+
     public $date = '';
+
     public function render()
     {
-        $orders = Order::where('user_id', Auth::id())->orderBy('created_at', 'desc')
+        $user = Auth::user();
+
+        $orders = Order::query()
+            ->when($user->role !== 'admin', function ($query) use ($user) {
+                $query->whereBelongsTo($user);
+            })
+            ->orderBy('created_at', 'desc')
             ->when($this->search, function ($query) {
                 $query->where(function ($q) {
                     $q->where('order_number', 'like', "%%$this->search%%")
                         ->orWhereHas('items.product', function ($productQuery) {
                             $productQuery->where('name', 'like', "%%$this->search%%");
+                        })->orWhereHas('user', function ($user) {
+                            $user->where('name', 'like', "%%$this->search%%");
                         });
                 });
             })
@@ -44,6 +55,8 @@ class MyOrders extends Component
             })
             ->get();
 
-        return view('livewire.user.my-orders', compact('orders'));
+        $total_orders = Order::count();
+
+        return view('livewire.user.all-orders', compact(['orders', 'total_orders']));
     }
 }

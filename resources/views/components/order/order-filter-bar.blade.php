@@ -10,7 +10,7 @@
                 <select wire:model.live="status" id="order-status" name="status" class="w-full rounded-xl border border-gray-700 bg-gray-950 px-4 py-3 text-sm text-gray-300 outline-none transition-colors focus:border-orange-500 focus:ring-1 focus:ring-orange-500">
                     <option value="">All statuses</option>
                     <option value="pending">Pending</option>
-                    <option value="processing">Processing</option>
+                    <option value="processed">Processing</option>
                     <option value="shipped">Shipped</option>
                     <option value="delivered">Delivered</option>
                     <option value="cancelled">Cancelled</option>

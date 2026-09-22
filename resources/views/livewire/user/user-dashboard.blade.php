@@ -7,7 +7,7 @@
 
         <div class="grid gap-8 lg:grid-cols-[250px_minmax(0,1fr)] lg:items-start">
             <!-- Account Sidebar -->
-            <x-user.dashboard-sidebar />
+            <x-user.user-sidebar />
 
             <div id="dashboard" class="min-w-0 space-y-8">
                 <!-- Welcome Section -->
@@ -49,10 +49,8 @@
                             <h2 class="mt-1 text-xl font-bold text-white">Recent Orders</h2>
                         </div><a href="{{route('all.orders')}}" class="text-sm font-medium text-orange-400 transition-colors hover:text-orange-300">View all orders <i class="fa-solid fa-arrow-right ml-1"></i></a>
                     </div>
-                    <div class="divide-y divide-gray-800">
-                        @foreach($orders as $order)
-                        <x-user.order-row :order="$order" />
-                        @endforeach
+                    <div class="divide-y divide-gray-800 overflow-x-auto">
+                        <x-order.order-row :orders="$orders" />
                     </div>
                 </section>
 

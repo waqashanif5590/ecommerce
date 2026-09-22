@@ -1,7 +1,7 @@
 <main x-data="{ showAddressModal: false, showDeleteConfirmation: false }" @keydown.escape.window="showAddressModal = false; showDeleteConfirmation = false" class="min-h-screen bg-gray-950 px-4 py-8 text-gray-300 sm:px-6 lg:px-8 lg:py-12">
     <div class="mx-auto max-w-7xl">
         <div class="grid gap-8 lg:grid-cols-[250px_minmax(0,1fr)] lg:items-start">
-            <x-user.dashboard-sidebar />
+            <x-user.user-sidebar />
 
             <div class="min-w-0 space-y-8">
         <!-- Page Header -->

@@ -94,7 +94,12 @@
                                 <div class="w-1 {{$order->status === 'processed' ? 'bg-green-500' : 'bg-gray-700'}} flex-grow" style="min-height: 80px;"></div>
                             </div>
                             <div class="pb-8 pt-1">
-                                <h3 class="font-semibold text-white text-base">Order Processing</h3>
+                                <div class="flex items-center justify-between gap-4">
+                                    <h3 class="font-semibold text-white text-base">Order Processing</h3>
+                                    @if (Auth::user()?->role === 'admin')
+                                    <button type="button" wire:click="setStatus('processed')" wire:loading.attr="disabled" class="rounded bg-orange-500 px-3 py-1 text-xs font-semibold text-white transition hover:bg-orange-400 disabled:opacity-50">Processed</button>
+                                    @endif
+                                </div>
                                 <p class="text-gray-400 text-sm mt-1">{{ $order->status === 'processed' ? $order->updated_at->format('M j, Y') : 'Not processed yet' }}</p>
                                 <p class="text-gray-600 text-sm mt-2">Your order is currently being prepared.</p>
                             </div>
@@ -111,7 +116,12 @@
                                 <div class="w-1 {{$order->status === 'shipped' ? 'bg-orange-500' : 'bg-gray-700'}} flex-grow" style="min-height: 80px;"></div>
                             </div>
                             <div class="pb-8 pt-1">
-                                <h3 class="font-semibold text-white text-base">Shipped</h3>
+                                <div class="flex items-center justify-between gap-4">
+                                    <h3 class="font-semibold text-white text-base">Shipped</h3>
+                                    @if (Auth::user()?->role === 'admin')
+                                    <button type="button" wire:click="setStatus('shipped')" wire:loading.attr="disabled" class="rounded bg-orange-500 px-3 py-1 text-xs font-semibold text-white transition hover:bg-orange-400 disabled:opacity-50">Shipped</button>
+                                    @endif
+                                </div>
                                 <p class="text-gray-400 text-sm mt-1">{{$order->status === 'shipped' ? $order->updated_at->format('M j, Y') : 'Not shipped yet' }}</p>
                                 <p class="text-gray-600 text-sm mt-2">Your order will be handed over to the delivery service.</p>
                             </div>
@@ -127,7 +137,12 @@
                                 <div class="w-1 bg-gray-700 flex-grow" style="min-height: 80px;"></div>
                             </div>
                             <div class="pb-8 pt-1">
-                                <h3 class="font-semibold text-gray-300 text-base">Out for Delivery</h3>
+                                <div class="flex items-center justify-between gap-4">
+                                    <h3 class="font-semibold text-gray-300 text-base">Out for Delivery</h3>
+                                    @if (Auth::user()?->role === 'admin')
+                                    <button type="button" wire:click="setStatus('out_for_delivery')" wire:loading.attr="disabled" class="rounded bg-orange-500 px-3 py-1 text-xs font-semibold text-white transition hover:bg-orange-400 disabled:opacity-50">Out for Delivery</button>
+                                    @endif
+                                </div>
                                 <p class="text-gray-500 text-sm mt-1">{{$order->status === 'out_for_delivery' ? $order->updated_at->format('M j, Y') : 'Not out for delivery yet' }}</p>
                                 <p class="text-gray-600 text-sm mt-2">Your order is on the way.</p>
                             </div>
@@ -143,7 +158,12 @@
                                 <div class="w-1 bg-gray-700 flex-grow" style="min-height: 80px;"></div>
                             </div>
                             <div class="pt-1">
-                                <h3 class="font-semibold text-gray-300 text-base">Delivered</h3>
+                                <div class="flex items-center justify-between gap-4">
+                                    <h3 class="font-semibold text-gray-300 text-base">Delivered</h3>
+                                    @if (Auth::user()?->role === 'admin')
+                                    <button type="button" wire:click="setStatus('delivered')" wire:loading.attr="disabled" class="rounded bg-orange-500 px-3 py-1 text-xs font-semibold text-white transition hover:bg-orange-400 disabled:opacity-50">Delivered</button>
+                                    @endif
+                                </div>
                                 <p class="text-gray-500 text-sm mt-1">{{$order->status === 'delivered' ? $order->updated_at->format('M j, Y') : 'Not delivered yet' }}</p>
                                 <p class="text-gray-600 text-sm mt-2">Your order will be delivered to your address.</p>
                             </div>
@@ -158,7 +178,12 @@
                                 </div>
                             </div>
                             <div class="pb-8 pt-1">
-                                <h3 class="font-semibold text-white text-base">Payment Confirmed</h3>
+                                <div class="flex items-center justify-between gap-4">
+                                    <h3 class="font-semibold text-white text-base">Payment Confirmed</h3>
+                                    @if (Auth::user()?->role === 'admin')
+                                    <button type="button" wire:click="setStatus('completed')" wire:loading.attr="disabled" class="rounded bg-orange-500 px-3 py-1 text-xs font-semibold text-white transition hover:bg-orange-400 disabled:opacity-50">Completed</button>
+                                    @endif
+                                </div>
                                 <p class="text-gray-400 text-sm mt-1">{{$order->payment->status === 'paid' ? $order->updated_at->format('M j, Y') : 'Not completed yet' }}</p>
                                 <p class="text-gray-600 text-sm mt-2">Your payment has been confirmed.</p>
                             </div>

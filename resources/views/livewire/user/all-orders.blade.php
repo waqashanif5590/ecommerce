@@ -3,18 +3,22 @@
         <!-- Account Container -->
         <div class="grid gap-8 lg:grid-cols-[250px_minmax(0,1fr)] lg:items-start">
             <!-- Account Sidebar -->
-            <x-user.dashboard-sidebar />
+            @if(Auth::user()->role==='user')
+            <x-user.user-sidebar />
+            @elseif(Auth::user()->role==='admin')
+            <x-admin.admin-sidebar :total_orders="$total_orders"/>
+            @endif
 
             <div id="orders" class="min-w-0 space-y-8">
                 <!-- Page Header -->
                 <header>
                     <p class="text-sm font-semibold uppercase tracking-[0.25em] text-orange-400">Account area</p>
-                    <h1 class="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">My Orders</h1>
+                    <h1 class="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">{{Auth::user()->role === 'admin' ? 'All Orders' : 'My Orders'}}</h1>
                     <p class="mt-2 text-sm leading-6 text-gray-400">View and manage your recent orders.</p>
                 </header>
 
                 <!-- Order Filters -->
-                <x-user.order-filter-bar />
+                <x-order.order-filter-bar />
 
                 <!-- Order List -->
                 <section aria-labelledby="order-list-heading">
@@ -25,10 +29,8 @@
                         </div>
                         <p class="hidden text-sm text-gray-500 sm:block">Showing your latest purchases</p>
                     </div>
-                    <div class="space-y-5">
-                        @foreach($orders as $order)
-                        <x-user.order-row :order="$order" />
-                        @endforeach
+                    <div class="overflow-x-auto">
+                        <x-order.order-row :orders="$orders" />
                     </div>
                 </section>
 

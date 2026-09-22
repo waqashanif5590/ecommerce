@@ -9,10 +9,10 @@ use App\Livewire\Shop\OrderConfirmation;
 use App\Livewire\Shop\ProductDetails;
 use App\Livewire\Shop\Products;
 use App\Livewire\Shop\Wishlist;
-use App\Livewire\User\MyOrders;
+use App\Livewire\User\AllOrders;
 use App\Livewire\User\OrderDetails;
-use App\Livewire\User\UserDashboard;
 use App\Livewire\User\UserAddress;
+use App\Livewire\User\UserDashboard;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'verified'])->group(function () {
@@ -24,7 +24,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // User routes
     Route::get('/user-dashboard', UserDashboard::class)->name('user.dashboard');
-    Route::get('/my-orders', MyOrders::class)->name('all.orders');
+    Route::get('/all-orders', AllOrders::class)->name('all.orders');
     Route::get('/order-details/{order}', OrderDetails::class)->name('order.details');
     Route::get('/user-address', UserAddress::class)->name('user.address');
 
@@ -38,4 +38,4 @@ Route::get('/products', Products::class)->name('products');
 Route::get('/products/{slug}', Products::class)->name('products.category');
 Route::get('/product-details/{slug}', ProductDetails::class)->name('product.details');
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';

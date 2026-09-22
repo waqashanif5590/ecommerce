@@ -1,18 +1,19 @@
 <?php
 
-namespace App\View\Components\User;
+namespace App\View\Components\admin;
 
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class OrderRow extends Component
+class customerList extends Component
 {
-    public $order;
-
-    public function __construct($order)
+    /**
+     * Create a new component instance.
+     */
+    public function __construct()
     {
-        $this->order = $order;
+        //
     }
 
     /**
@@ -20,6 +21,6 @@ class OrderRow extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.user.order-row');
+        return view('components.admin.customer-list');
     }
 }

@@ -59,7 +59,7 @@
              </li>
              @auth
              <li class="w-full md:w-auto">
-                 <a href="{{route('user.dashboard')}}" class="block p-3 pl-10 text-left
+                 <a href="{{Auth::user()->role==='admin'?route('admin.dashboard'):route('user.dashboard')}}" class="block p-3 pl-10 text-left
                            md:px-2 md:py-2 md:text-center
                            lg:px-3">
                      My Dashboard
