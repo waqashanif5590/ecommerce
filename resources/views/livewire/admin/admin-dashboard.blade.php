@@ -1,7 +1,7 @@
 <main class="min-h-screen bg-gray-950 px-4 py-8 text-gray-300 sm:px-6 lg:px-8 lg:py-10">
     <div class="mx-auto max-w-7xl">
         <div class="grid gap-8 lg:grid-cols-[220px_minmax(0,1fr)]">
-            <x-admin.admin-sidebar :total_orders="$total_orders" />
+            <x-admin.admin-sidebar :totalOrders="$total_orders" />
 
             <div id="overview" class="min-w-0 space-y-8">
                 <header class="flex flex-col justify-between gap-5 border-b border-gray-800 pb-7 sm:flex-row sm:items-end">
@@ -12,11 +12,9 @@
                     </div>
                 </header>
 
-                <x-admin.date-range />
-
                 <section aria-label="Store performance" class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
                     <x-admin.performance-card title="Total Revenue"
-                        value="PKR 842,490"
+                        :value="$totalRevenue"
                         description="Compared with last month"
                         growth="+18.5%"
                         text="text-emerald-400"
@@ -24,14 +22,14 @@
                     <x-admin.performance-card title="Total Orders"
                         :value="$total_orders"
                         description="Across all channels"
-                        growth="+8.6%"
-                        text="text-emerald-400"
+                        :growth="($ordersGrowth>=0?'+':'-') . number_format($ordersGrowth, 1) . '%'"
+                        :text="$ordersGrowth>=0?'text-emerald-400':'text-rose-400'"
                         icon="fa-cart-shopping" />
                     <x-admin.performance-card title="New Customers"
                         :value="$new_customers"
                         description="Since the start of month"
-                        growth="+12.3%"
-                        text="text-emerald-400"
+                        :growth="($customersGrowth>=0?'+':'-') . number_format($customersGrowth, 1) . '%'"
+                        :text="$customersGrowth>=0?'text-emerald-400':'text-rose-400'"
                         icon="fa-user-plus" />
                     <x-admin.performance-card title="Low Stock Items"
                         :value="$low_stock_items"

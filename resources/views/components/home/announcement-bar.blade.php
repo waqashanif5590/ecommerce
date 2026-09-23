@@ -1,2 +1,2 @@
  <p class="bg-gradient-to-r from-orange-600 to-orange-500 py-2 text-center text-sm font-medium blinking">Free
-     shipping on orders over <b>$75</b> | Use code <b>STRIDE20</b> for 20% off your first order</p>
+     shipping on orders over <b>$75</b> | Use code <b>STRIDE20</b> for 20% off on your first order</p>

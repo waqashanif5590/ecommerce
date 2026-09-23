@@ -1,12 +1,12 @@
 <?php
 
-namespace App\View\Components\Admin;
+namespace App\View\Components\modals;
 
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class dateRange extends Component
+class paymentConfirmModal extends Component
 {
     /**
      * Create a new component instance.
@@ -21,6 +21,6 @@ class dateRange extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.admin.date-range');
+        return view('components.modals.payment-confirm-modal');
     }
 }

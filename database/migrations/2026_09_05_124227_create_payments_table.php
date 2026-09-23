@@ -18,7 +18,7 @@ return new class extends Migration
                 ->cascadeOnDelete();
             $table->string('method');
             $table->string('status')->default('pending');
-            $table->unsignedInteger('amount_payed')->default(0);
+            $table->unsignedInteger('amount_paid')->default(0);
             $table->string('transcation_id')->nullable();
             $table->timestamp('paid_at')->nullable();
             $table->timestamps();

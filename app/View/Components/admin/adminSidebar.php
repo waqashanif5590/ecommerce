@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\admin;
+namespace App\View\Components\Admin;
 
 use Closure;
 use Illuminate\Contracts\View\View;
@@ -8,14 +8,10 @@ use Illuminate\View\Component;
 
 class adminSidebar extends Component
 {
-    /**
-     * Create a new component instance.
-     */
-    public $total_orders;
-
-    public function __construct($total_orders)
+    public $totalOrders;
+    public function __construct($totalOrders)
     {
-        $this->total_orders = $total_orders;
+        $this->totalOrders = $totalOrders;
     }
 
     /**

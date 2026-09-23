@@ -57,3 +57,22 @@ it('hides status controls and rejects status updates for non admins', function (
 
     expect($order->fresh()->status)->toBe('pending');
 });
+
+it('only pulses the current active stage in the order progress timeline', function () {
+    $admin = User::factory()->create(['role' => 'admin']);
+    $order = createOrderForStatusTest($admin);
+
+    $order->update([
+        'status' => 'completed',
+        'processed_at' => now()->subDays(4),
+        'shipped_at' => now()->subDays(3),
+        'out_for_delivery_at' => now()->subDays(2),
+        'delivered_at' => now()->subDay(),
+        'completed_at' => now(),
+    ]);
+
+    $component = Livewire::actingAs($admin)
+        ->test(OrderDetails::class, ['order' => $order]);
+
+    expect(substr_count($component->html(), 'animate-pulse'))->toBe(1);
+});

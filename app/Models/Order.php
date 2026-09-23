@@ -6,6 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
+    public function casts(): array
+    {
+        return [
+            'processed_at' => 'datetime',
+            'shipped_at' => 'datetime',
+            'out_for_delivery_at' => 'datetime',
+            'delivered_at' => 'datetime',
+            'completed_at' => 'datetime',
+        ];
+    }
+
     protected $guarded = [];
 
     public function items()
