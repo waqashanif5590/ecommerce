@@ -1,19 +1,18 @@
 <?php
 
-namespace App\View\Components;
+namespace App\View\Components\User;
 
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class footer extends Component
+class UserAccountInfo extends Component
 {
-    /**
-     * Create a new component instance.
-     */
-    public function __construct()
+    public $user;
+
+    public function __construct($user)
     {
-        //
+        $this->user = $user;
     }
 
     /**
@@ -21,6 +20,6 @@ class footer extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.footer');
+        return view('components.user.user-account-info');
     }
 }

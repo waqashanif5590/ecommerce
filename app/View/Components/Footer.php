@@ -1,12 +1,12 @@
 <?php
 
-namespace App\View\Components\modals;
+namespace App\View\Components;
 
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class paymentConfirmModal extends Component
+class Footer extends Component
 {
     /**
      * Create a new component instance.
@@ -21,6 +21,6 @@ class paymentConfirmModal extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.modals.payment-confirm-modal');
+        return view('components.footer');
     }
 }

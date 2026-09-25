@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class adminSidebar extends Component
+class AdminSidebar extends Component
 {
     public $totalOrders;
     public function __construct($totalOrders)

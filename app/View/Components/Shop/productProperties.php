@@ -1,12 +1,12 @@
 <?php
 
-namespace App\View\Components\shop;
+namespace App\View\Components\Shop;
 
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class productProperties extends Component
+class ProductProperties extends Component
 {
     /**
      * Create a new component instance.

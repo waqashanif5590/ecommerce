@@ -6,14 +6,13 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class bestSellingProducts extends Component
+class BestSellingProducts extends Component
 {
-    /**
-     * Create a new component instance.
-     */
-    public function __construct()
+    public $topSellingProducts;
+
+    public function __construct($topSellingProducts = [])
     {
-        //
+        $this->topSellingProducts = $topSellingProducts;
     }
 
     /**
@@ -21,6 +20,8 @@ class bestSellingProducts extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.admin.best-selling-products');
+        return view('components.admin.best-selling-products', [
+            'topSellingProducts' => $this->topSellingProducts,
+        ]);
     }
 }

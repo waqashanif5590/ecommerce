@@ -1,12 +1,12 @@
 <?php
 
-namespace App\View\Components\checkout;
+namespace App\View\Components\Checkout;
 
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class addressForm extends Component
+class AddressForm extends Component
 {
     /**
      * Create a new component instance.

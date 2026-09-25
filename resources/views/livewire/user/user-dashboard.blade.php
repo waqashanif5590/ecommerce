@@ -56,48 +56,11 @@
 
                 <div class="grid gap-8 xl:grid-cols-2">
                     <!-- Account Information -->
-                    <section id="profile" class="rounded-2xl border border-gray-800 bg-gray-900 p-6">
-                        <div class="flex items-center justify-between gap-4">
-                            <h2 class="text-xl font-bold text-white">Account Information</h2><a href="{{route('profile')}}" class="text-sm font-medium text-orange-400 hover:text-orange-300">Edit Profile</a>
-                        </div>
-                        <dl class="mt-6 grid gap-5 sm:grid-cols-2">
-                            <div>
-                                <dt class="text-xs font-semibold uppercase tracking-wider text-gray-500">Full Name</dt>
-                                <dd class="mt-1 text-sm text-gray-200">{{Auth::user()->name}}</dd>
-                            </div>
-                            <div>
-                                <dt class="text-xs font-semibold uppercase tracking-wider text-gray-500">Email</dt>
-                                <dd class="mt-1 break-all text-sm text-gray-200">{{Auth::user()->email}}</dd>
-                            </div>
-                            <div>
-                                <dt class="text-xs font-semibold uppercase tracking-wider text-gray-500">Phone</dt>
-                                <dd class="mt-1 text-sm text-gray-200">{{Auth::user()->phone?Auth::user()->phone:'N/A'}}</dd>
-                            </div>
-                            <div>
-                                <dt class="text-xs font-semibold uppercase tracking-wider text-gray-500">Activity Type</dt>
-                                <dd class="mt-1 text-sm text-gray-200">Regular customer</dd>
-                            </div>
-                        </dl>
-                    </section>
+                    <x-user.user-account-info :user="Auth::user()" />
 
                     <!-- Default Address -->
-                    <section id="address" class="rounded-2xl border border-gray-800 bg-gray-900 p-6">
-                        <div class="flex items-center justify-between gap-4">
-                            <h2 class="text-xl font-bold text-white">Default Shipping Address</h2><i class="fa-solid fa-location-dot text-orange-400"></i>
-                        </div>
-                        <div class="mt-6 space-y-1 text-sm leading-6 text-gray-400">
-                            @if($address)
-                            <p class="font-semibold text-gray-200">{{$address->name}}</p>
-                            <p>{{$address->address_line}}</p>
-                            <p>{{$address->city}}, {{$address->state}} {{$address->zip_code}}</p>
-                            <p>{{$address->phone}}</p>
-                            @else
-                            <p class="font-semibold text-gray-200">No default address set</p>
-                            @endif
-                        </div>
+                    <x-user.user-default-address-card :address="$address" />
 
-                        <div class="mt-5 flex flex-wrap gap-4"><a href="{{route('user.address')}}" class="text-sm font-medium text-orange-400 hover:text-orange-300">Manage Addresses</a></div>
-                    </section>
                 </div>
 
                 <!-- Wishlist Preview -->

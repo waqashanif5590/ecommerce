@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class orderFilterBar extends Component
+class UserRecentActivity extends Component
 {
     /**
      * Create a new component instance.
@@ -21,6 +21,6 @@ class orderFilterBar extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.user.order-filter-bar');
+        return view('components.user.user-recent-activity');
     }
 }

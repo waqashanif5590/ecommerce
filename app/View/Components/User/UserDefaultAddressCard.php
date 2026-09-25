@@ -1,15 +1,14 @@
 <?php
 
-namespace App\View\Components\User;
+namespace App\View\Components\user;
 
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class AddressCard extends Component
+class UserDefaultAddressCard extends Component
 {
     public $address;
-
     public function __construct($address)
     {
         $this->address = $address;
@@ -20,6 +19,6 @@ class AddressCard extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.user.address-card');
+        return view('components.user.user-default-address-card');
     }
 }

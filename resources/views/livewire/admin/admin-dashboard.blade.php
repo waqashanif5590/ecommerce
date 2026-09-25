@@ -16,8 +16,8 @@
                     <x-admin.performance-card title="Total Revenue"
                         :value="$totalRevenue"
                         description="Compared with last month"
-                        growth="+18.5%"
-                        text="text-emerald-400"
+                        :growth="($revenueGrowth>=0?'+':'-') . number_format($revenueGrowth, 1) . '%'"
+                        :text="$revenueGrowth>=0?'text-emerald-400':'text-rose-400'"
                         icon="fa-wallet" />
                     <x-admin.performance-card title="Total Orders"
                         :value="$total_orders"
@@ -58,8 +58,8 @@
                 </section>
 
                 <section id="products" class="grid gap-8 md:grid-cols-2">
-                    <x-admin.best-selling-products />
-                    <x-admin.customer-list />
+                    <x-admin.best-selling-products :topSellingProducts="$topSellingProducts"/>
+                    <x-admin.customer-list :customers="$customers"/>
                 </section>
             </div>
         </div>

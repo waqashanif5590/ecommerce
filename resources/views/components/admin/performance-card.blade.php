@@ -3,7 +3,7 @@
         <div class="rounded-xl bg-orange-500/15 p-3 text-orange-400"><i class="fa-solid {{$icon}} text-lg"></i></div><span class="text-xs font-bold {{$text}}">{{$growth}}</span>
     </div>
     <p class="mt-5 text-sm text-gray-500">{{$title}}</p>
-    <p class="mt-1 text-2xl font-black text-white">{{$value}}</p>
+    <p class="mt-1 text-2xl font-black text-white">{{number_format($value)}}</p>
     <p class="mt-2 text-xs text-gray-600">{{$description}}</p>
 </article>
 <!-- <article class="rounded-2xl border border-gray-800 bg-gray-900 p-5">

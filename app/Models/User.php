@@ -23,6 +23,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(CustomerReview::class);
     }
+
     public function productReviews()
     {
         return $this->hasMany(ProductReview::class);
@@ -63,12 +64,30 @@ class User extends Authenticatable
 
     public function getUserPendingOrdersAttribute()
     {
-        return $this->orders()->where('status', 'pending')->count();
+        return $this->orders()->where('status', '!=', 'completed')->count();
+    }
+
+    public function getUserCompletedOrdersAttribute()
+    {
+        return $this->orders()->where('status', 'completed')->count();
+    }
+
+    public function getUserCancelledOrdersAttribute()
+    {
+        return $this->orders()->where('status', 'cancelled')->count();
     }
 
     public function getUserWishlistsAttribute()
     {
         return $this->wishlists->count();
+    }
+
+    public function getUserNameFirstLetters()
+    {
+        $name = $this->name;
+        $splitName = explode(' ', $name);
+
+        return ucfirst($splitName[0][0]).ucfirst($splitName[1][0]);
     }
 
     /**
