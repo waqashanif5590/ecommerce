@@ -8,7 +8,11 @@
     </div>
     <p class="mt-5 text-sm leading-6 text-gray-400">Blocking prevents Hassan from signing in while preserving their order history. Deleting the account is permanent and cannot be undone.</p>
     <div class="mt-6 flex flex-col gap-3 sm:flex-row">
-        <button type="button" wire:click="confirmBlockUser" class="inline-flex items-center justify-center gap-2 rounded-xl border border-amber-500/40 px-4 py-2.5 text-sm font-semibold text-amber-300 transition-colors hover:bg-amber-500/10"><i class="fa-solid fa-ban"></i>Block user</button>
-        <button type="button" wire:click="confirmDeleteUser" class="inline-flex items-center justify-center gap-2 rounded-xl border border-rose-500/40 px-4 py-2.5 text-sm font-semibold text-rose-300 transition-colors hover:bg-rose-500/10"><i class="fa-solid fa-trash"></i>Delete user</button>
+        <button type="button" wire:click="confirmBlockUser({{$user->id}})" class="inline-flex items-center justify-center gap-2 rounded-xl border border-amber-500/40 px-4 py-2.5 text-sm font-semibold text-amber-300 transition-colors hover:bg-amber-500/10">
+            <i class="fa-solid fa-ban"></i>
+            {{$user->status==0?'Unblock':'Block'}} user</button>
+        <button type="button" wire:click="confirmDeleteUser({{$user->id}})" class="inline-flex items-center justify-center gap-2 rounded-xl border border-rose-500/40 px-4 py-2.5 text-sm font-semibold text-rose-300 transition-colors hover:bg-rose-500/10">
+            <i class="fa-solid fa-trash"></i>
+            Delete user</button>
     </div>
 </section>

@@ -54,6 +54,7 @@
                         </div>
                     </div>
                 </section>
+                   <x-search-input title="Search Customers" description="Search Customers by name or email"/>
 
                 <x-admin.customer-list :customers="$customers" />
             </div>

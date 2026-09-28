@@ -10,6 +10,8 @@ use Livewire\Component;
 #[Layout('layouts.app')]
 class AllUsers extends Component
 {
+    public $search = '';
+    public function mout() {}
     public function render()
     {
         $total_orders = Order::count();
@@ -19,8 +21,13 @@ class AllUsers extends Component
             now()->endOfMonth(),
         ])->count();
         $customers_with_orders = User::has('orders')->count();
+        
         $customers = User::withCount('orders as total_orders')
             ->orderByDesc('created_at')
+            ->when($this->search, function ($query) {
+                $query->where('name', 'LIKE', "%%$this->search%%")
+                    ->orWhere('email', 'LIKE', "%%$this->search%%");
+            })
             ->get();
 
         return view('livewire.admin.all-users', compact([

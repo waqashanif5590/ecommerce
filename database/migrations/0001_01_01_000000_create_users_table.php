@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('phone');
             $table->string('role')->default('user');
             $table->string('activity_type');
+            $table->boolean('status')->default(1);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

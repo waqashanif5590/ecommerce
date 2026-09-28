@@ -1,7 +1,7 @@
 <main class="min-h-screen bg-gray-950 px-4 py-8 text-gray-300 sm:px-6 lg:px-8 lg:py-10">
     <div class="mx-auto max-w-7xl">
         <div class="grid gap-8 lg:grid-cols-[220px_minmax(0,1fr)]">
-            <x-admin.admin-sidebar />
+            <x-admin.admin-sidebar :totalOrders="$totalOrders"/>
 
             <div class="min-w-0 space-y-8">
                 <header class="flex flex-col justify-between gap-5 border-b border-gray-800 pb-7 sm:flex-row sm:items-end">
@@ -59,10 +59,10 @@
                 </section>
 
                 <section aria-label="Report summary" class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
-                    <x-admin.performance-card title="Total Revenue" value="PKR 842,490" description="For the selected period" growth="+18.5%" text="text-emerald-400" icon="fa-wallet" />
-                    <x-admin.performance-card title="Total Orders" value="1,284" description="Completed and processing" growth="+8.6%" text="text-emerald-400" icon="fa-cart-shopping" />
-                    <x-admin.performance-card title="Average Order Value" value="PKR 656" description="Average per completed order" growth="+6.2%" text="text-emerald-400" icon="fa-receipt" />
-                    <x-admin.performance-card title="New Customers" value="356" description="Joined during this period" growth="+12.3%" text="text-emerald-400" icon="fa-user-plus" />
+                    <x-admin.performance-card title="Total Revenue" value=842490 description="For the selected period" growth="+18.5%" text="text-emerald-400" icon="fa-wallet" />
+                    <x-admin.performance-card title="Total Orders" value=1284 description="Completed and processing" growth="+8.6%" text="text-emerald-400" icon="fa-cart-shopping" />
+                    <x-admin.performance-card title="Average Order Value" value=656 description="Average per completed order" growth="+6.2%" text="text-emerald-400" icon="fa-receipt" />
+                    <x-admin.performance-card title="New Customers" value=356 description="Joined during this period" growth="+12.3%" text="text-emerald-400" icon="fa-user-plus" />
                 </section>
 
                 <section class="grid gap-8 xl:grid-cols-[minmax(0,1.55fr)_minmax(300px,0.85fr)]">

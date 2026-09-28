@@ -74,9 +74,21 @@
                 </section>
 
                 <div class="grid gap-8 md:grid-cols-2">
-                   
+
                     <x-user.user-recent-activity />
-                    <x-admin.account-management />
+                    <x-admin.account-management :user="$user" />
+                    <x-modals.confirmation-modal
+                        wire:key="block-user-modal"
+                        name="block-user"
+                        title="{{$user->status==0?'Unblock':'Block'}} User"
+                        message="Are you sure you want to {{$user->status==0?'Unblock':'Block'}} {{$user->name}}"
+                        confirmText="{{$user->status==0?'Unblock':'Block'}}" />
+                    <x-modals.confirmation-modal
+                        wire:key="delete-user-modal"
+                        name="delete-user"
+                        title="Delete User"
+                        message="Are you sure you want to delete {{$user->name}}"
+                        confirmText="Delete" />
                 </div>
             </div>
         </div>

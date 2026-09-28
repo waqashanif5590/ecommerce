@@ -4,12 +4,14 @@ namespace App\Livewire\Admin;
 
 use Livewire\Attributes\Layout;
 use Livewire\Component;
+use App\Models\Order;
 
 #[Layout('layouts.app')]
 class ReportsAnalytics extends Component
 {
     public function render()
     {
-        return view('livewire.admin.reports-analytics');
+        $totalOrders = Order::count();
+        return view('livewire.admin.reports-analytics', compact(['totalOrders']));
     }
 }
