@@ -10,7 +10,8 @@
                         <h2 class="mt-2 text-3xl font-black tracking-tight text-white sm:text-4xl">Customer profile</h2>
                         <p class="mt-2 max-w-2xl text-sm leading-6 text-gray-500">Review account details, order history, and customer activity before taking action on this account.</p>
                     </div>
-                    <a href="#orders" class="inline-flex items-center gap-2 text-sm font-semibold text-orange-400 transition-colors hover:text-orange-300"><i class="fa-solid fa-arrow-left"></i>Back to customers</a>
+                    <a href="{{route('all.users')}}" class="inline-flex items-center gap-2 text-sm font-semibold text-orange-400 transition-colors hover:text-orange-300">
+                        <i class="fa-solid fa-arrow-left"></i>Back to customers</a>
                 </header>
 
                 <section id="overview" class="overflow-hidden rounded-2xl border border-gray-800 bg-gray-900">

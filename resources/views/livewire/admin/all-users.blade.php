@@ -1,7 +1,7 @@
 <main class="min-h-screen bg-gray-950 px-4 py-8 text-gray-300 sm:px-6 lg:px-8 lg:py-10">
     <div class="mx-auto max-w-7xl">
         <div class="grid gap-8 lg:grid-cols-[220px_minmax(0,1fr)]">
-            <x-admin.admin-sidebar :totalOrders="$total_orders" />
+            <x-admin.admin-sidebar :totalOrders="$totalOrders" />
 
             <div class="min-w-0 space-y-8">
                 <header class="flex flex-col justify-between gap-5 border-b border-gray-800 pb-7 sm:flex-row sm:items-end">
@@ -56,7 +56,7 @@
                 </section>
                    <x-search-input title="Search Customers" description="Search Customers by name or email"/>
 
-                <x-admin.customer-list :customers="$customers" />
+                <x-admin.customer-list :customers="$customers"/>
             </div>
         </div>
     </div>

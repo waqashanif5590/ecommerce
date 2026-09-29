@@ -19,14 +19,24 @@
         @endif
         <div
             class="action-buttons invisible absolute inset-0 flex translate-y-4 items-end justify-center space-x-2 bg-gradient-to-tr from-black to-transparent px-2 py-4 opacity-0 transition-all duration-300 ease-out group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
+            @if(Auth::check() && Auth::user()->role==='admin')
+            <a href="{{route('editproduct', $product->slug)}}" aria-label="Add Velocity Runner Pro to cart"
+                class="w-[75%] cursor-pointer rounded text-gray-900 bg-gray-300 px-4 py-2 transition-colors hover:bg-gray-200 text-center">
+                Edit Product
+            </a>
+            <button type="button" wire:click="deleteProduct({{$product->id}})" class="w-[25%] cursor-pointer rounded bg-gray-300 px-4 py-2 transition-colors text-gray-900 hover:bg-gray-200">
+                <i class="fa-regular fa-trash-can"></i>
+            </button>
+            @endif
+            @if(!Auth::check() || Auth::user()->role==='user')
             <a href="{{route('product.details', $product->slug)}}" aria-label="Add Velocity Runner Pro to cart"
                 class="w-[75%] cursor-pointer rounded text-gray-900 bg-gray-300 px-4 py-2 transition-colors hover:bg-gray-200 text-center">
                 View Details
             </a>
             <button type="button" wire:click="addToWishlist({{$product->id}})" class="w-[25%] cursor-pointer rounded bg-gray-300 px-4 py-2 transition-colors text-gray-900 hover:bg-gray-200">
-
                 <i class="fa-{{ $product->isInWishlist ? 'solid' : 'regular' }} fa-heart"></i>
             </button>
+            @endif
         </div>
     </div>
     <div class="item-details mt-3 flex justify-between">

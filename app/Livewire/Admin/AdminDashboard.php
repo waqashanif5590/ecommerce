@@ -29,7 +29,7 @@ class AdminDashboard extends Component
             $this->redirectRoute('/');
         }
         $orders = Order::orderBy('created_at', 'desc')->take(3)->get();
-        $total_orders = Order::count();
+        $totalOrders = Order::count();
         $new_customers = User::whereBetween('created_at', [
             now()->startOfMonth(),
             now()->endOfMonth(),
@@ -85,13 +85,13 @@ class AdminDashboard extends Component
         $customers = User::whereBetween('created_at', [
             now()->startOfMonth(),
             now()->endOfMonth(),
-        ])->withCount('orders as total_orders')
-            ->orderByDesc('total_orders')
+        ])->withCount('orders as totalOrders')
+            ->orderByDesc('totalOrders')
             ->take(4)->get();
 
         return view('livewire.admin.admin-dashboard', compact([
             'orders',
-            'total_orders',
+            'totalOrders',
             'new_customers',
             'low_stock_items',
             'totalRevenue',

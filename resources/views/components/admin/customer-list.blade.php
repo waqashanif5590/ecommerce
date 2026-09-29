@@ -40,7 +40,7 @@
                   <p class="truncate text-sm font-semibold text-white">{{$customer->name}}</p>
                   <p class="text-xs text-gray-500">{{$customer->email}}</p>
               </div>
-              <span class="text-xs text-gray-500">{{$customer->total_orders}} orders</span>
+              <span class="text-xs text-gray-500">{{$customer->totalOrders}} orders</span>
               <span class="text-xs text-gray-500"><a href="{{route('user.profile', $customer->id)}}" class="inline-flex items-center gap-2 text-sm font-semibold text-orange-400 hover:text-orange-300">Action</a></span>
           </div>
           @endforeach

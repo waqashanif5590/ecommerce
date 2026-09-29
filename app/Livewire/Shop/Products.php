@@ -54,6 +54,10 @@ class Products extends Component
             );
         }
     }
+    public function deleteProduct(int $productId): void
+    {
+        dd($productId);
+    }
 
     public function mount($slug = null)
     {

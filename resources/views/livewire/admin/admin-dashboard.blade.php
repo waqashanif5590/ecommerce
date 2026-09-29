@@ -1,7 +1,7 @@
 <main class="min-h-screen bg-gray-950 px-4 py-8 text-gray-300 sm:px-6 lg:px-8 lg:py-10">
     <div class="mx-auto max-w-7xl">
         <div class="grid gap-8 lg:grid-cols-[220px_minmax(0,1fr)]">
-            <x-admin.admin-sidebar :totalOrders="$total_orders" />
+            <x-admin.admin-sidebar :totalOrders="$totalOrders" />
 
             <div id="overview" class="min-w-0 space-y-8">
                 <header class="flex flex-col justify-between gap-5 border-b border-gray-800 pb-7 sm:flex-row sm:items-end">
@@ -20,7 +20,7 @@
                         :text="$revenueGrowth>=0?'text-emerald-400':'text-rose-400'"
                         icon="fa-wallet" />
                     <x-admin.performance-card title="Total Orders"
-                        :value="$total_orders"
+                        :value="$totalOrders"
                         description="Across all channels"
                         :growth="($ordersGrowth>=0?'+':'-') . number_format($ordersGrowth, 1) . '%'"
                         :text="$ordersGrowth>=0?'text-emerald-400':'text-rose-400'"

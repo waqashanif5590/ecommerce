@@ -14,7 +14,7 @@ class AllUsers extends Component
     public function mout() {}
     public function render()
     {
-        $total_orders = Order::count();
+        $totalOrders = Order::count();
         $total_customers = User::count();
         $new_customers = User::whereBetween('created_at', [
             now()->startOfMonth(),
@@ -22,8 +22,8 @@ class AllUsers extends Component
         ])->count();
         $customers_with_orders = User::has('orders')->count();
         
-        $customers = User::withCount('orders as total_orders')
-            ->orderByDesc('created_at')
+        $customers = User::withCount('orders as totalOrders')
+            ->orderByDesc('totalOrders')
             ->when($this->search, function ($query) {
                 $query->where('name', 'LIKE', "%%$this->search%%")
                     ->orWhere('email', 'LIKE', "%%$this->search%%");
@@ -31,7 +31,7 @@ class AllUsers extends Component
             ->get();
 
         return view('livewire.admin.all-users', compact([
-            'total_orders',
+            'totalOrders',
             'total_customers',
             'new_customers',
             'customers_with_orders',
