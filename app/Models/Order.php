@@ -9,6 +9,7 @@ class Order extends Model
     public function casts(): array
     {
         return [
+            'cancelled_at' => 'datetime',
             'processed_at' => 'datetime',
             'shipped_at' => 'datetime',
             'out_for_delivery_at' => 'datetime',

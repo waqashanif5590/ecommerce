@@ -24,7 +24,7 @@
                 class="w-[75%] cursor-pointer rounded text-gray-900 bg-gray-300 px-4 py-2 transition-colors hover:bg-gray-200 text-center">
                 Edit Product
             </a>
-            <button type="button" wire:click="deleteProduct({{$product->id}})" class="w-[25%] cursor-pointer rounded bg-gray-300 px-4 py-2 transition-colors text-gray-900 hover:bg-gray-200">
+            <button type="button" wire:click="confirmDeleteProduct({{$product->id}})" class="w-[25%] cursor-pointer rounded bg-gray-300 px-4 py-2 transition-colors text-gray-900 hover:bg-gray-200">
                 <i class="fa-regular fa-trash-can"></i>
             </button>
             @endif

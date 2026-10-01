@@ -12,7 +12,7 @@
                     class="w-fit rounded-full border border-gray-700 px-4 py-2 text-sm text-gray-400">Showing 24
                     products</span>
             </div>
-            <x-search-input title="Search Products" description="Search shoes, collections, or styles"/>
+            <x-search-input title="Search Products" description="Search shoes, collections, or styles" />
         </div>
     </section>
     <section class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
@@ -110,6 +110,12 @@
                     <x-shop.product-card :product="$product" />
                     @endforeach
                 </div>
+                <x-modals.confirmation-modal
+                    wire:key="delete-product-modal"
+                    name="delete-product"
+                    title="Delete Product"
+                    message="Are you sure you want to delete this product? This action cannot be undone."
+                    confirmText="Delete" />
             </div>
         </div>
     </section>

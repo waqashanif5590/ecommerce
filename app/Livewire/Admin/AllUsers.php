@@ -15,6 +15,7 @@ class AllUsers extends Component
     public function render()
     {
         $totalOrders = Order::count();
+        $pendingOrders = Order::where('status', 'pending')->count();
         $total_customers = User::count();
         $new_customers = User::whereBetween('created_at', [
             now()->startOfMonth(),
@@ -36,6 +37,7 @@ class AllUsers extends Component
             'new_customers',
             'customers_with_orders',
             'customers',
+            'pendingOrders',
         ]));
     }
 }

@@ -11,6 +11,7 @@ use Livewire\Component;
 class OrderDetails extends Component
 {
     private const STATUS_OPTIONS = [
+        'cancelled',
         'processed',
         'shipped',
         'out_for_delivery',
@@ -18,13 +19,12 @@ class OrderDetails extends Component
         'completed',
     ];
 
-    private const STATUS_ORDER = [
-        'pending',
-        'processed',
-        'shipped',
-        'out_for_delivery',
-        'delivered',
-        'completed',
+    private const STATUS_TRANSITIONS = [
+        'pending' => ['cancelled', 'processed'],
+        'processed' => ['shipped'],
+        'shipped' => ['out_for_delivery'],
+        'out_for_delivery' => ['delivered'],
+        'delivered' => ['completed'],
     ];
 
     public Order $order;
@@ -42,6 +42,7 @@ class OrderDetails extends Component
     public function isStatusCompleted(string $status): bool
     {
         return match ($status) {
+            'cancelled' => $this->order->cancelled_at !== null,
             'processed' => $this->order->processed_at !== null,
             'shipped' => $this->order->shipped_at !== null,
             'out_for_delivery' => $this->order->out_for_delivery_at !== null,
@@ -54,6 +55,7 @@ class OrderDetails extends Component
     public function getStatusDate(string $status): ?string
     {
         return match ($status) {
+            'cancelled' => $this->order->cancelled_at?->format('M j, Y'),
             'processed' => $this->order->processed_at?->format('M j, Y'),
             'shipped' => $this->order->shipped_at?->format('M j, Y'),
             'out_for_delivery' => $this->order->out_for_delivery_at?->format('M j, Y'),
@@ -71,6 +73,7 @@ class OrderDetails extends Component
     public function isNextStatus(string $status): bool
     {
         return match ($status) {
+            'cancelled' => $this->order->status === 'cancelled',
             'processed' => $this->order->status === 'pending',
             'shipped' => $this->order->status === 'processed',
             'out_for_delivery' => $this->order->status === 'shipped',
@@ -86,12 +89,10 @@ class OrderDetails extends Component
 
         abort_unless(in_array($status, self::STATUS_OPTIONS, true), 422);
 
-        $currentIndex = array_search($this->order->status, self::STATUS_ORDER, true);
-        $newIndex = array_search($status, self::STATUS_ORDER, true);
-
-        abort_unless($newIndex === $currentIndex + 1, 422);
+        abort_unless(in_array($status, self::STATUS_TRANSITIONS[$this->order->status] ?? [], true), 422);
 
         $dateColumn = match ($status) {
+            'cancelled' => 'cancelled_at',
             'processed' => 'processed_at',
             'shipped' => 'shipped_at',
             'out_for_delivery' => 'out_for_delivery_at',

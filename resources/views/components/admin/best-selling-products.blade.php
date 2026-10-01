@@ -11,13 +11,13 @@
          <div class="mt-6 space-y-5">
              @php
              $topSellingProducts = collect($topSellingProducts ?? []);
-             $maxSold = $topSellingProducts->max('total_sold') ?? 0;
+             $totalSold = $topSellingProducts->sum('total_sold') ?? 0;
              @endphp
 
              @forelse($topSellingProducts as $item)
 
              @php
-             $percentage = $maxSold > 0 ? ($item->total_sold / $maxSold * 100) : 0;
+             $percentage = $totalSold > 0 ? ($item->total_sold / $totalSold * 100) : 0;
              $progressColor = $progressColors[$loop->index % count($progressColors)];
              @endphp
              <div class="flex items-center gap-4">

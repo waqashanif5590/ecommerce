@@ -30,6 +30,7 @@ class AdminDashboard extends Component
         }
         $orders = Order::orderBy('created_at', 'desc')->take(3)->get();
         $totalOrders = Order::count();
+        $pendingOrders = Order::where('status', 'pending')->count();
         $new_customers = User::whereBetween('created_at', [
             now()->startOfMonth(),
             now()->endOfMonth(),
@@ -92,6 +93,7 @@ class AdminDashboard extends Component
         return view('livewire.admin.admin-dashboard', compact([
             'orders',
             'totalOrders',
+            'pendingOrders',
             'new_customers',
             'low_stock_items',
             'totalRevenue',

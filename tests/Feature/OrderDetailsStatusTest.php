@@ -46,6 +46,18 @@ it('allows admins to update an order status', function () {
     expect($order->fresh()->status)->toBe('processed');
 });
 
+it('allows admins to cancel a pending order', function () {
+    $admin = User::factory()->create(['role' => 'admin']);
+    $order = createOrderForStatusTest($admin);
+
+    Livewire::actingAs($admin)
+        ->test(OrderDetails::class, ['order' => $order])
+        ->call('setStatus', 'cancelled')
+        ->assertSet('order.status', 'cancelled');
+
+    expect($order->fresh()->cancelled_at)->not->toBeNull();
+});
+
 it('hides status controls and rejects status updates for non admins', function () {
     $user = User::factory()->create();
     $order = createOrderForStatusTest($user);

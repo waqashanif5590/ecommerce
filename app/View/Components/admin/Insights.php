@@ -8,12 +8,23 @@ use Illuminate\View\Component;
 
 class Insights extends Component
 {
-    /**
-     * Create a new component instance.
-     */
-    public function __construct()
-    {
-        //
+    public $newCustomers;
+    public $customersGrowth;
+    public $topCity;
+    public $repeatPurchaseRate;
+    public $returningCustomersRate;
+    public function __construct(
+        $newCustomers,
+        $customersGrowth,
+        $topCity,
+        $repeatPurchaseRate,
+        $returningCustomersRate
+    ) {
+        $this->newCustomers = $newCustomers;
+        $this->customersGrowth = $customersGrowth;
+        $this->topCity = $topCity;
+        $this->repeatPurchaseRate = $repeatPurchaseRate;
+        $this->returningCustomersRate = $returningCustomersRate;
     }
 
     /**

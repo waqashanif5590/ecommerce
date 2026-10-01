@@ -1,7 +1,7 @@
 <main class="min-h-screen bg-gray-950 px-4 py-8 text-gray-300 sm:px-6 lg:px-8 lg:py-10">
     <div class="mx-auto max-w-7xl">
         <div class="grid gap-8 lg:grid-cols-[220px_minmax(0,1fr)]">
-            <x-admin.admin-sidebar :totalOrders="$totalOrders" />
+            <x-admin.admin-sidebar :totalOrders="$orderPending" />
 
             <div class="min-w-0 space-y-8">
                 <header class="flex flex-col justify-between gap-5 border-b border-gray-800 pb-7 sm:flex-row sm:items-end">
@@ -22,25 +22,25 @@
                     <x-admin.performance-card title="Total Revenue"
                         :value="$totalRevenue"
                         description="Compared with last month"
-                        :growth="($revenueGrowth>=0?'+':'-') . number_format($revenueGrowth, 1) . '%'"
+                        :growth="($revenueGrowth>=0?'+':' ') . number_format($revenueGrowth, 1) . '%'"
                         :text="$revenueGrowth>=0?'text-emerald-400':'text-rose-400'"
                         icon="fa-wallet" />
                     <x-admin.performance-card title="Total Orders"
                         :value="$totalOrders"
                         description="Across all channels"
-                        :growth="($ordersGrowth>=0?'+':'-') . number_format($ordersGrowth, 1) . '%'"
+                        :growth="($ordersGrowth>=0?'+':' ') . number_format($ordersGrowth, 1) . '%'"
                         :text="$ordersGrowth>=0?'text-emerald-400':'text-rose-400'"
                         icon="fa-cart-shopping" />
                     <x-admin.performance-card title="New Customers"
                         :value="$new_customers"
                         description="Since the start of month"
-                        :growth="($customersGrowth>=0?'+':'-') . number_format($customersGrowth, 1) . '%'"
+                        :growth="($customersGrowth>=0?'+':' ') . number_format($customersGrowth, 1) . '%'"
                         :text="$customersGrowth>=0?'text-emerald-400':'text-rose-400'"
                         icon="fa-user-plus" />
                     <x-admin.performance-card title="Average Order Value"
                         :value="$average_order_value"
                         description="Compared with last month"
-                        :growth="($averageOrderValueGrowth>=0?'+':'-') . number_format($averageOrderValueGrowth, 1) . '%'"
+                        :growth="($averageOrderValueGrowth>=0?'+':' ') . number_format($averageOrderValueGrowth, 1) . '%'"
                         :text="$averageOrderValueGrowth>=0?'text-emerald-400':'text-rose-400'"
                         icon="fa-receipt" />
                     <x-admin.performance-card title="Low Stock Items"
@@ -61,12 +61,16 @@
                         :orderPending="$orderPending"
                         :orderCancelled="$orderCancelled" />
 
-                    <x-admin.insights />
+                    <x-admin.insights :newCustomers="$new_customers"
+                        :customersGrowth="($customersGrowth>=0?'+':'') . number_format($customersGrowth, 1) . '%'" 
+                        :topCity="$topCity"
+                        :repeatPurchaseRate="$repeatPurchaseRate"
+                        :returningCustomersRate="$returningCustomersRate"/>
                 </section>
 
                 <section class="grid gap-8 md:grid-cols-2">
                     <x-admin.best-selling-products :topSellingProducts="$topSellingProducts" />
-                    <x-admin.top-categories-bar :categoryPerformace="$categoryPerformace"/>
+                    <x-admin.top-categories-bar :categoryPerformace="$categoryPerformace" />
                 </section>
 
                 <x-admin.low-stock-inventory :lowStocks="$lowStocks" />

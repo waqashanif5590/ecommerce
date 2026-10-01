@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Admin\AdminDashboard;
 use App\Livewire\Admin\ReportsAnalytics;
 use App\Models\Order;
 use App\Models\User;
@@ -63,4 +64,34 @@ test('average order value growth compares completed orders with the previous mon
         ->test(ReportsAnalytics::class)
         ->assertSee('3,000')
         ->assertSee('+200.0%');
+});
+
+test('admin dashboard and analytics show weekly revenue from current month orders', function () {
+    $admin = User::factory()->create(['role' => 'admin']);
+
+    createOrderForAnalyticsTest($admin, 'pending', 20000)
+        ->forceFill(['created_at' => now()->startOfMonth()->addDays(2)])
+        ->save();
+    createOrderForAnalyticsTest($admin, 'completed', 40000)
+        ->forceFill(['created_at' => now()->startOfMonth()->addDays(9)])
+        ->save();
+    createOrderForAnalyticsTest($admin, 'completed', 90000)
+        ->forceFill(['created_at' => now()->subMonth()->startOfMonth()->addDays(2)])
+        ->save();
+
+    Livewire::actingAs($admin)
+        ->test(AdminDashboard::class)
+        ->assertSee('PKR 60,000')
+        ->assertSee('20k')
+        ->assertSee('40k')
+        ->assertSee('height: 42%')
+        ->assertSee('height: 84%');
+
+    Livewire::actingAs($admin)
+        ->test(ReportsAnalytics::class)
+        ->assertSee('PKR 60,000')
+        ->assertSee('20k')
+        ->assertSee('40k')
+        ->assertSee('height: 42%')
+        ->assertSee('height: 84%');
 });

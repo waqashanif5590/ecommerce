@@ -56,7 +56,8 @@ class AllOrders extends Component
             ->get();
 
         $total_orders = Order::count();
+        $pendingOrders = Order::where('status', 'pending')->count();
 
-        return view('livewire.user.all-orders', compact(['orders', 'total_orders']));
+        return view('livewire.user.all-orders', compact(['orders', 'total_orders', 'pendingOrders']));
     }
 }

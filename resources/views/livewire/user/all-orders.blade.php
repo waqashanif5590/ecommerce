@@ -6,7 +6,7 @@
             @if(Auth::user()->role==='user')
             <x-user.user-sidebar />
             @elseif(Auth::user()->role==='admin')
-            <x-admin.admin-sidebar :total_orders="$total_orders"/>
+            <x-admin.admin-sidebar :total_orders="$pendingOrders"/>
             @endif
 
             <div id="orders" class="min-w-0 space-y-8">

@@ -164,17 +164,31 @@
                             <!-- Timeline Content -->
 
                             <div class="pb-8 pt-1">
+                                <div class="flex items-center justify-between gap-4">
+                                    <h3 class="font-semibold text-white text-base">
+                                        Order Placed
+                                    </h3>
+                                    @if (Auth::user()?->role === 'admin' && $order->status === 'pending')
 
-                                <h3 class="font-semibold text-white text-base">
-                                    Order Placed
-                                </h3>
+                                    <button
+                                        type="button"
+                                        wire:click="setStatus('cancelled')"
+                                        wire:loading.attr="disabled"
+                                        class="rounded bg-orange-500 px-3 py-1 text-xs font-semibold text-white transition hover:bg-orange-400 disabled:opacity-50">
+
+                                        Cancel
+
+                                    </button>
+
+                                    @endif
+                                </div>
 
                                 <p class="text-gray-400 text-sm mt-1">
                                     {{ $order->created_at->format('M j, Y') }}
                                 </p>
 
                                 <p class="text-gray-600 text-sm mt-2">
-                                    Your order has been successfully placed.
+                                   {{$order->status==='cancelled'?'Your order was cancelled.':'Your order has been successfully placed.'}} 
                                 </p>
 
                             </div>
@@ -225,7 +239,7 @@
                                         Order Processing
                                     </h3>
 
-                                    @if (Auth::user()?->role === 'admin' && $order->status === 'pending')
+                                    @if (Auth::user()?->role === 'admin' && ($order->status === 'pending' && $order->status !== 'cancelled'))
 
                                     <button
                                         type="button"
@@ -297,7 +311,7 @@
                                         Shipped
                                     </h3>
 
-                                    @if (Auth::user()?->role === 'admin' && $order->status === 'processed')
+                                    @if (Auth::user()?->role === 'admin' && ($order->status === 'processed' && $order->status !== 'cancelled'))
 
                                     <button
                                         type="button"
@@ -369,7 +383,7 @@
                                         Out for Delivery
                                     </h3>
 
-                                    @if (Auth::user()?->role === 'admin' && $order->status === 'shipped')
+                                    @if (Auth::user()?->role === 'admin' && ($order->status === 'shipped' && $order->status !== 'cancelled'))
 
                                     <button
                                         type="button"
@@ -441,7 +455,7 @@
                                         Delivered
                                     </h3>
 
-                                    @if (Auth::user()?->role === 'admin' && $order->status === 'out_for_delivery')
+                                    @if (Auth::user()?->role === 'admin' && ($order->status === 'out_for_delivery' && $order->status !== 'cancelled'))
 
                                     <button
                                         type="button"
@@ -506,7 +520,7 @@
                                         Payment Confirmed
                                     </h3>
 
-                                    @if (Auth::user()?->role === 'admin' && $order->status === 'delivered')
+                                    @if (Auth::user()?->role === 'admin' && ($order->status === 'delivered' && $order->status !== 'cancelled'))
 
                                     <button
                                         type="button"

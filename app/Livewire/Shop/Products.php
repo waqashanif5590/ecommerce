@@ -8,6 +8,7 @@ use App\Models\Wishlist;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
+use Livewire\Attributes\On;
 
 #[Layout('layouts.app')]
 class Products extends Component
@@ -18,6 +19,21 @@ class Products extends Component
     public $sortBy = '';
     public $feature = '';
     public $price = '';
+    #[On('confirmation-confirmed')]
+    public function handleConfirmationConfirmed($id, $name)
+    {
+        if ($name === 'delete-product') {
+            $this->deleteProduct($id);
+        }
+    }
+    public function confirmDeleteProduct(int $productId)
+    {
+        $this->dispatch(
+            'open-confirmation-modal',
+            name: 'delete-product',
+            id: $productId
+        );
+    }
     public function addToWishlist(int $productId): void
     {
         if (Auth::guest()) {
@@ -56,7 +72,11 @@ class Products extends Component
     }
     public function deleteProduct(int $productId): void
     {
-        dd($productId);
+        abort_unless(Auth::user()?->role === 'admin', 403);
+        $product = Product::findOrFail($productId);
+        $product->delete();
+        session()->flash('alert', 'The selected product was deleted successfully');
+        $this->redirectRoute('products', navigate: true);
     }
 
     public function mount($slug = null)
