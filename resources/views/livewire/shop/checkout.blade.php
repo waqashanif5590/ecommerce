@@ -186,7 +186,7 @@
                     @foreach($cartItems as $cartItem)
                     <div class="flex gap-3 rounded-xl border border-gray-800 bg-gray-900 p-3">
                         <div class="h-16 w-16 shrink-0 rounded-lg bg-gradient-to-br from-orange-500/25 via-gray-700 to-gray-900">
-                            <img src="{{asset('/images/'.$cartItem->productVariant->product->primaryImage->image)}}" alt="" class="h-full w-full">
+                            <img src="{{$cartItem->productVariant->product->primaryImage->image_url}}" alt="" class="h-full w-full">
                         </div>
                         <div class="min-w-0 flex-1">
                             <div class="flex items-start justify-between gap-3">

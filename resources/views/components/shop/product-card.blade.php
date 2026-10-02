@@ -1,7 +1,7 @@
 <div class="card">
     <div
         class="image group relative h-60 rounded-2xl bg-cover bg-center bg-no-repeat p-5 transition-transform duration-300 hover:scale-105"
-        style="background-image: url('{{ asset('images/' . ($product->primaryImage?->image ?? 'landing_back.jpg')) }}');">
+        style="background-image: url('{{ $product->primaryImage?->image_url ?? asset('images/landing_back.jpg') }}');">
 
         @if($product->total_discount!=NULL)
         <div class="w-fit rounded-[13px] bg-orange-500 px-2 py-0.5 text-sm font-bold text-white">

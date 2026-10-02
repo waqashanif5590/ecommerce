@@ -5,13 +5,13 @@
                 Revenue overview
             </p>
             <h3 id="sales-performance-title" class="mt-1 text-xl font-bold text-white">
-                Sales this month
+                {{ $periodTitle }}
             </h3>
             <p class="mt-1 text-sm text-gray-500">Weekly revenue (PKR)</p>
         </div>
 
         <div class="rounded-lg border border-gray-800 bg-gray-950 px-3 py-2 sm:text-right">
-            <p class="text-xs font-medium text-gray-500">Monthly total</p>
+            <p class="text-xs font-medium text-gray-500">{{ $totalLabel }}</p>
             <p class="mt-1 text-sm font-bold tabular-nums text-white">PKR {{ number_format($monthlyRevenue) }}</p>
         </div>
     </div>

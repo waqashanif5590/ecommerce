@@ -9,14 +9,14 @@
             <button type="button" wire:click="addToWishlist({{$product->id}})" aria-label="Add Velocity Runner Pro to wishlist"
                 class="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-black/60 text-white transition-colors hover:bg-orange-500"><i
                     class="fa-regular fa-heart"></i></button>
-            <img src="{{asset('/images/'.$product->primaryImage->image)}}" alt="Velocity Runner Pro running shoes"
+            <img src="{{$product->primaryImage->image_url}}" alt="Velocity Runner Pro running shoes"
                 class="h-full w-full object-cover">
         </div>
         <div class="mt-3 grid grid-cols-4 gap-3">
             @foreach($product->images as $image)
             <button type="button" aria-label="View front product image"
                 class="aspect-square overflow-hidden rounded-xl border-2 border-orange-500 bg-gray-900"><img
-                    src="{{asset('/images/'.$image->image)}}" alt="" class="h-full w-full object-cover"></button>
+                    src="{{$image->image_url}}" alt="" class="h-full w-full object-cover"></button>
             @endforeach
         </div>
     </div>

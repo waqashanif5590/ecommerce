@@ -8,9 +8,18 @@
                         pair.</h1>
                     <p class="mt-3 max-w-2xl text-gray-400">Explore performance, comfort, and everyday style in one
                         place.</p>
-                </div><span
-                    class="w-fit rounded-full border border-gray-700 px-4 py-2 text-sm text-gray-400">Showing 24
-                    products</span>
+                </div>
+                <div class="flex flex-col gap-3 md:items-end">
+                    @if(Auth::check() && Auth::user()->role === 'admin')
+                    <a href="{{ route('admin.products.create') }}"
+                        class="inline-flex w-fit items-center justify-center gap-2 rounded-xl bg-orange-500 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-orange-400">
+                        <i class="fa-solid fa-plus" aria-hidden="true"></i>
+                        Add product
+                    </a>
+                    @endif
+                    <span class="w-fit rounded-full border border-gray-700 px-4 py-2 text-sm text-gray-400">Showing 24
+                        products</span>
+                </div>
             </div>
             <x-search-input title="Search Products" description="Search shoes, collections, or styles" />
         </div>
@@ -96,7 +105,7 @@
                     <p class="text-sm text-gray-500">24 results</p><label
                         class="flex items-center gap-3 text-sm text-gray-400">Sort by
                         <select name="sort" wire:model.live.600ms="sortBy"
-                            class="rounded-lg border border-gray-700 bg-gray-900 px-3 py-2 text-gray-200 outline-none focus:border-orange-500">
+                         class="rounded-lg border border-gray-700 bg-gray-900 px-3 py-2 text-gray-200 outline-none focus:border-orange-500">
                             <option value="">All Products</option>
                             <option value="newest">Newest</option>
                             <option value="top-rated">Top rated</option>

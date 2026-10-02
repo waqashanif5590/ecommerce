@@ -568,7 +568,7 @@
                             <div class="flex-shrink-0 w-24 h-24 bg-gray-700 rounded-lg overflow-hidden">
 
                                 <img
-                                    src="{{ asset('images/' . $item->product->primaryImage->image) }}"
+                                    src="{{ $item->product->primaryImage->image_url }}"
                                     alt="{{ $item->product->name }}"
                                     class="w-full h-full object-cover">
 

@@ -1,6 +1,6 @@
   <article class="rounded-2xl border border-gray-800 bg-gray-950 p-4 sm:p-5">
       <div class="flex gap-4 sm:gap-5">
-          <div class="h-28 w-24 shrink-0 overflow-hidden rounded-xl bg-gray-800 sm:h-36 sm:w-32"><img src="{{asset('images/'.$cartItem->productVariant->product->primaryImage->image)}}" alt="Velocity Runner Pro shoes" class="h-full w-full object-cover transition-transform duration-300 hover:scale-105"></div>
+          <div class="h-28 w-24 shrink-0 overflow-hidden rounded-xl bg-gray-800 sm:h-36 sm:w-32"><img src="{{$cartItem->productVariant->product->primaryImage->image_url}}" alt="Velocity Runner Pro shoes" class="h-full w-full object-cover transition-transform duration-300 hover:scale-105"></div>
           <div class="min-w-0 flex-1">
               <div class="flex items-start justify-between gap-3">
                   <div>

@@ -21,25 +21,25 @@
                 <section aria-label="Report summary" class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
                     <x-admin.performance-card title="Total Revenue"
                         :value="$totalRevenue"
-                        description="Compared with last month"
+                        description="Compared with previous period"
                         :growth="($revenueGrowth>=0?'+':' ') . number_format($revenueGrowth, 1) . '%'"
                         :text="$revenueGrowth>=0?'text-emerald-400':'text-rose-400'"
                         icon="fa-wallet" />
                     <x-admin.performance-card title="Total Orders"
                         :value="$totalOrders"
-                        description="Across all channels"
+                        description="During selected period"
                         :growth="($ordersGrowth>=0?'+':' ') . number_format($ordersGrowth, 1) . '%'"
                         :text="$ordersGrowth>=0?'text-emerald-400':'text-rose-400'"
                         icon="fa-cart-shopping" />
                     <x-admin.performance-card title="New Customers"
                         :value="$new_customers"
-                        description="Since the start of month"
+                        description="During selected period"
                         :growth="($customersGrowth>=0?'+':' ') . number_format($customersGrowth, 1) . '%'"
                         :text="$customersGrowth>=0?'text-emerald-400':'text-rose-400'"
                         icon="fa-user-plus" />
                     <x-admin.performance-card title="Average Order Value"
                         :value="$average_order_value"
-                        description="Compared with last month"
+                        description="Compared with previous period"
                         :growth="($averageOrderValueGrowth>=0?'+':' ') . number_format($averageOrderValueGrowth, 1) . '%'"
                         :text="$averageOrderValueGrowth>=0?'text-emerald-400':'text-rose-400'"
                         icon="fa-receipt" />
@@ -52,8 +52,8 @@
                 </section>
 
                 <section class="grid gap-8 xl:grid-cols-[minmax(0,1.55fr)_minmax(300px,0.85fr)]">
-                    <x-admin.sales-performance-graph />
-                    <x-admin.category-performance-graph />
+                    <x-admin.sales-performance-graph :start-date="$filterStartDate" :end-date="$filterEndDate" />
+                    <x-admin.category-performance-graph :category-performance="$categoryPerformace" />
                 </section>
 
                 <section class="grid gap-8 md:grid-cols-2">

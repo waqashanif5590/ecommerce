@@ -6,6 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
+    protected $fillable = [
+        'category_id',
+        'name',
+        'slug',
+        'description',
+        'price',
+        'total_discount',
+        'badge',
+        'is_new',
+        'status',
+    ];
+
     public function category()
     {
         return $this->belongsTo(Category::class);
@@ -25,6 +37,7 @@ class Product extends Model
     {
         return $this->hasMany(Wishlist::class);
     }
+
     public function reviews()
     {
         return $this->hasMany(ProductReview::class);
@@ -44,7 +57,7 @@ class Product extends Model
 
     public function getFormattedPriceAttribute()
     {
-        return 'PKR ' . number_format($this->price);
+        return 'PKR '.number_format($this->price);
     }
 
     public function getDiscountedPriceAttribute()
@@ -54,6 +67,7 @@ class Product extends Model
 
         return $discounted_price;
     }
+
     public function getAverageRatingAttribute()
     {
         return $this->reviews()->avg('rating');

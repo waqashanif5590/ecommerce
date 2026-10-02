@@ -48,7 +48,7 @@ test('average order value is zero when there are no completed orders', function 
         ->assertSeeInOrder([
             'Average Order Value',
             '0',
-            'Compared with last month',
+            'Compared with previous period',
         ]);
 });
 
@@ -64,6 +64,50 @@ test('average order value growth compares completed orders with the previous mon
         ->test(ReportsAnalytics::class)
         ->assertSee('3,000')
         ->assertSee('+200.0%');
+});
+
+test('report date range filters orders and revenue', function () {
+    $admin = User::factory()->create(['role' => 'admin']);
+    $startDate = now()->subDays(10)->toDateString();
+    $endDate = now()->subDays(5)->toDateString();
+
+    createOrderForAnalyticsTest($admin, 'completed', 1000)
+        ->forceFill(['created_at' => now()->subDays(8)])
+        ->save();
+    createOrderForAnalyticsTest($admin, 'pending', 500)
+        ->forceFill(['created_at' => now()->subDays(7)])
+        ->save();
+    createOrderForAnalyticsTest($admin, 'completed', 9000)
+        ->forceFill(['created_at' => now()->subDays(2)])
+        ->save();
+
+    Livewire::actingAs($admin)
+        ->test(ReportsAnalytics::class)
+        ->set('rangePreset', 'custom')
+        ->set('startDate', $startDate)
+        ->set('endDate', $endDate)
+        ->call('applyDateRange')
+        ->assertHasNoErrors()
+        ->assertSet('filterStartDate', $startDate)
+        ->assertSet('filterEndDate', $endDate)
+        ->assertSee('PKR 1,500')
+        ->assertSeeInOrder([
+            'Total Orders',
+            '2',
+            'During selected period',
+        ]);
+});
+
+test('report date range rejects an end date before the start date', function () {
+    $admin = User::factory()->create(['role' => 'admin']);
+
+    Livewire::actingAs($admin)
+        ->test(ReportsAnalytics::class)
+        ->set('rangePreset', 'custom')
+        ->set('startDate', '2026-09-20')
+        ->set('endDate', '2026-09-10')
+        ->call('applyDateRange')
+        ->assertHasErrors(['endDate' => 'after_or_equal']);
 });
 
 test('admin dashboard and analytics show weekly revenue from current month orders', function () {

@@ -2,9 +2,11 @@
 
 use App\Livewire\Admin\AdminDashboard;
 use App\Livewire\Admin\AllUsers;
+use App\Livewire\Admin\CreateCategory;
+use App\Livewire\Admin\CreateProduct;
+use App\Livewire\Admin\EditProduct;
 use App\Livewire\Admin\ReportsAnalytics;
 use App\Livewire\Admin\UserProfile;
-use App\Livewire\Admin\EditProduct;
 use App\Livewire\Index;
 use App\Livewire\Shop\Cart;
 use App\Livewire\Shop\Categories;
@@ -37,6 +39,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/admin/reports-analytics', ReportsAnalytics::class)->name('admin.reports');
     Route::get('/admin/all-users', AllUsers::class)->name('all.users');
     Route::get('/user-profile/{customer}', UserProfile::class)->name('user.profile');
+    Route::get('/admin/products/create', CreateProduct::class)->name('admin.products.create');
+    Route::get('/admin/categories/create', CreateCategory::class)->name('admin.categories.create');
     Route::get('/edit-product/{product}', EditProduct::class)->name('editproduct');
 });
 
