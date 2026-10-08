@@ -236,6 +236,24 @@ class ProductDetails extends Component
             }])
             ->withAvg('reviews', 'rating')
             ->withCount('reviews')
+            // with count of 5 star, 4 star, 3 star, 2 star, 1 star reviews
+            ->withCount([
+                'reviews as five_star_reviews_count' => function ($query) {
+                    $query->where('rating', 5);
+                },
+                'reviews as four_star_reviews_count' => function ($query) {
+                    $query->where('rating', 4);
+                },
+                'reviews as three_star_reviews_count' => function ($query) {
+                    $query->where('rating', 3);
+                },
+                'reviews as two_star_reviews_count' => function ($query) {
+                    $query->where('rating', 2);
+                },
+                'reviews as one_star_reviews_count' => function ($query) {
+                    $query->where('rating', 1);
+                },
+            ])
             ->firstOrFail();
         $all_products = Product::withExists(['wishlists as isInWishlist' => function ($query) {
             $query->where('user_id', Auth::id());

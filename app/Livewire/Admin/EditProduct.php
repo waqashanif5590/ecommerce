@@ -3,9 +3,10 @@
 namespace App\Livewire\Admin;
 
 use App\Models\Category;
+use App\Models\Order;
 use App\Models\Product;
-use App\Models\ProductVariant;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -109,10 +110,17 @@ class EditProduct extends Component
             'status' => 'required|boolean',
             'is_new' => 'boolean',
             'variants' => 'array',
+            'variants.*.id' => 'required|integer|distinct',
             'variants.*.size' => 'required|string|max:255',
             'variants.*.color' => 'required|string|max:255',
             'variants.*.quantity' => 'required|integer|min:0',
             'variants.*.status' => 'required|boolean',
+            'primaryImage' => [
+                'nullable',
+                'integer',
+                Rule::exists('product_images', 'id')
+                    ->where('product_id', $product->id),
+            ],
             'newImages' => 'nullable|array',
             'newImages.*' => 'image|mimes:jpg,jpeg,png,webp|max:5120',
         ]);
@@ -129,9 +137,7 @@ class EditProduct extends Component
         ]);
 
         foreach ($validated['variants'] as $variant) {
-            $productVariant = ProductVariant::where('product_id', $product->id)
-                ->firstOrFail();
-            $productVariant->update([
+            $product->variants()->findOrFail($variant['id'])->update([
                 'size' => $variant['size'],
                 'color' => $variant['color'],
                 'quantity' => $variant['quantity'],
@@ -159,9 +165,9 @@ class EditProduct extends Component
             'is_primary' => false,
         ]);
 
-        if ($this->primaryImage) {
+        if ($validated['primaryImage'] ?? null) {
             $product->images()
-                ->where('id', $this->primaryImage)
+                ->where('id', $validated['primaryImage'])
                 ->update([
                     'is_primary' => true,
                 ]);
@@ -184,7 +190,7 @@ class EditProduct extends Component
             ->with(['images', 'variants', 'category'])
             ->firstOrFail();
         $categories = Category::all();
-        $pendingOrders = \App\Models\Order::where('status', 'pending')->count();
+        $pendingOrders = Order::where('status', 'pending')->count();
 
         return view('livewire.admin.edit-product', compact(
             'product',

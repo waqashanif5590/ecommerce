@@ -93,3 +93,43 @@ test('admins can create products with a primary image and an initial variant', f
     expect($product->images->first()->image)->not->toContain('/');
     Storage::disk('public')->assertExists('images/'.$product->images->first()->image);
 });
+
+test('admins can remove selected images and choose a primary image when creating products', function () {
+    Storage::fake('public');
+    $this->actingAs(User::factory()->create(['role' => 'admin']));
+    $category = Category::query()->create([
+        'title' => 'Running',
+        'description' => 'Running shoes.',
+        'slug' => 'running',
+        'image' => 'running.jpg',
+    ]);
+
+    Livewire::test(CreateProduct::class)
+        ->set('name', 'Velocity Runner')
+        ->set('categoryId', $category->id)
+        ->set('description', 'A lightweight daily running shoe.')
+        ->set('price', '2500')
+        ->set('totalDiscount', '10')
+        ->set('badge', 'Bestseller')
+        ->set('isNew', true)
+        ->set('variants', [
+            ['size' => '42', 'color' => 'Black', 'quantity' => '12'],
+        ])
+        ->set('images', [
+            UploadedFile::fake()->image('front.png'),
+            UploadedFile::fake()->image('side.png'),
+            UploadedFile::fake()->image('back.png'),
+        ])
+        ->set('primaryImage', 2)
+        ->call('removeImage', 0)
+        ->assertSet('primaryImage', 1)
+        ->assertSee('Set as primary')
+        ->call('save')
+        ->assertRedirect(route('products'));
+
+    $product = Product::query()->with('images')->firstOrFail();
+
+    expect($product->images)->toHaveCount(2)
+        ->and($product->images->where('is_primary', true))->toHaveCount(1)
+        ->and($product->images->firstWhere('is_primary', true)->sort_order)->toBe(2);
+});

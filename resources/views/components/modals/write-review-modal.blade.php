@@ -32,7 +32,7 @@
                                 <div>
                                     <input id="rating-{{ $i }}" type="radio" wire:model="rating" value="{{ $i }}" class="peer sr-only">
                                     <label for="rating-{{ $i }}" class="block cursor-pointer text-2xl text-gray-600 transition-colors hover:text-orange-400 peer-checked:text-orange-400 focus-within:outline-none focus-within:ring-2 focus-within:ring-orange-400 focus-within:ring-offset-2 focus-within:ring-offset-gray-900" title="{{ $i }} star{{ $i === 1 ? '' : 's' }}">
-                                        <i class="fa-solid fa-star" aria-hidden="true">⭐</i>
+                                        <i class="fa-solid fa-star" aria-hidden="true"></i>
                                         <span class="sr-only">{{ $i }} star{{ $i === 1 ? '' : 's' }}</span>
                                     </label>
                                 </div>

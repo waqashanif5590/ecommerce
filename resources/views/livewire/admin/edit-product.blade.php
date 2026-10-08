@@ -44,7 +44,9 @@
 
                         <x-admin.products.product-images
                             :product="$product"
-                            :new-images="$newImages"
+                            :uploaded-images="$newImages"
+                            :primary-image="$primaryImage"
+                            image-model="newImages"
                         />
 
                         <x-admin.products.product-variants :variants="$variants" />

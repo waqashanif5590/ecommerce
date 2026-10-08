@@ -5,20 +5,30 @@
          <div class="mt-3 text-orange-400">@for($i=1; $i<=($product->getAverageRatingAttribute()); $i++)★@endfor</div>
          <p class="mt-2 text-sm text-gray-500">Based on {{count($product->reviews)}} reviews</p>
          <div class="mt-6 space-y-2 text-xs">
-             <div class="flex items-center gap-3"><span>5</span>
+             <div class="flex items-center gap-3 text-white"><span>5</span>
                  <div class="h-2 flex-1 rounded-full bg-gray-800">
-                     <div class="h-full w-[88%] rounded-full bg-orange-500"></div>
-                 </div><span class="text-gray-500">112</span>
+                     <div class="h-full rounded-full bg-orange-500" style="width: {{ $product->five_star_reviews_count > 0 ? ($product->five_star_reviews_count / $product->reviews->count()) * 100 : 0 }}%"></div>
+                 </div><span class="text-gray-500">{{$product->five_star_reviews_count}}</span>
              </div>
-             <div class="flex items-center gap-3"><span>4</span>
+             <div class="flex items-center gap-3 text-white"><span>4</span>
                  <div class="h-2 flex-1 rounded-full bg-gray-800">
-                     <div class="h-full w-[10%] rounded-full bg-orange-500"></div>
-                 </div><span class="text-gray-500">12</span>
+                     <div class="h-full rounded-full bg-orange-500" style="width: {{ $product->four_star_reviews_count > 0 ? ($product->four_star_reviews_count / $product->reviews->count()) * 100 : 0 }}%"></div>
+                 </div><span class="text-gray-500">{{$product->four_star_reviews_count}}</span>
              </div>
-             <div class="flex items-center gap-3"><span>3</span>
+             <div class="flex items-center gap-3 text-white"><span>3</span>
                  <div class="h-2 flex-1 rounded-full bg-gray-800">
-                     <div class="h-full w-[3%] rounded-full bg-orange-500"></div>
-                 </div><span class="text-gray-500">3</span>
+                     <div class="h-full rounded-full bg-orange-500" style="width: {{ $product->three_star_reviews_count > 0 ? ($product->three_star_reviews_count / $product->reviews->count()) * 100 : 0 }}%"></div>
+                 </div><span class="text-gray-500">{{$product->three_star_reviews_count}}</span>
+             </div>
+             <div class="flex items-center gap-3 text-white"><span>2</span>
+                 <div class="h-2 flex-1 rounded-full bg-gray-800">
+                     <div class="h-full rounded-full bg-orange-500" style="width: {{ $product->two_star_reviews_count > 0 ? ($product->two_star_reviews_count / $product->reviews->count()) * 100 : 0 }}%"></div>
+                 </div><span class="text-gray-500">{{$product->two_star_reviews_count}}</span>
+             </div>
+             <div class="flex items-center gap-3 text-white"><span>1</span>
+                 <div class="h-2 flex-1 rounded-full bg-gray-800">
+                     <div class="h-full rounded-full bg-orange-500" style="width: {{ $product->one_star_reviews_count > 0 ? ($product->one_star_reviews_count / $product->reviews->count()) * 100 : 0 }}%"></div>
+                 </div><span class="text-gray-500">{{$product->one_star_reviews_count}}</span>
              </div>
          </div>
      </div>

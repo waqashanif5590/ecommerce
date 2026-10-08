@@ -39,7 +39,7 @@
                             class="flex justify-between transition-colors hover:text-orange-400">
                             <span class="text-gray-300">{{$category->title}}</span>
                             <span
-                                class="text-gray-600">34</span>
+                                class="text-gray-600">{{ $category->products->count() }}</span>
                         </a>
                         @endforeach
 

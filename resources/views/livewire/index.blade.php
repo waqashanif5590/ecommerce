@@ -92,13 +92,37 @@
    <div
       class="customer-section mx-auto flex max-w-7xl flex-col items-center justify-center px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
       <span class="bg-[rgb(163_77_9/23%)] text-orange-400 px-2.5 py-1 rounded-xl">Customer Love</span>
-      <h1 class="text-3xl text-white font-bold text-center mt-5">What Our Customers Say</h1>
+      <h1 id="customer-reviews-heading" class="text-3xl text-white font-bold text-center mt-5">What Our Customers Say</h1>
       <p class="text-center text-gray-300 mt-4">Join thousands of happy customers who have made Stride their go-to
          footware brand.</p>
-      <div class="customer-review-container mt-12 grid w-full grid-cols-1 gap-7 lg:mt-16 lg:grid-cols-3">
+      <div
+         x-data="{ move(direction) { const track = this.$refs.track; const card = track.firstElementChild; if (!card) { return; } const gap = parseFloat(getComputedStyle(track).columnGap) || 0; track.scrollBy({ left: direction * (card.getBoundingClientRect().width + gap), behavior: 'smooth' }); } }"
+         class="customer-review-carousel relative mt-12 w-full lg:mt-16"
+         role="region"
+         aria-roledescription="carousel"
+         aria-labelledby="customer-reviews-heading">
+         @if($customer_reviews->count() > 1)
+         <div class="pointer-events-none absolute inset-y-0 left-0 right-0 z-10 flex items-center justify-between">
+            <button type="button" @click="move(-1)"
+               class="pointer-events-auto flex h-11 w-11 items-center justify-center rounded-full border border-gray-700 bg-gray-900 text-white shadow-lg transition duration-300 hover:scale-105 hover:border-orange-500 hover:text-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-400"
+               aria-label="Previous customer review">
+               <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+            </button>
+            <button type="button" @click="move(1)"
+               class="pointer-events-auto flex h-11 w-11 items-center justify-center rounded-full border border-gray-700 bg-gray-900 text-white shadow-lg transition duration-300 hover:scale-105 hover:border-orange-500 hover:text-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-400"
+               aria-label="Next customer review">
+               <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+            </button>
+         </div>
+         @endif
+         <div x-ref="track" class="customer-review-container flex snap-x snap-mandatory gap-7 overflow-x-auto scroll-smooth px-12 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
          @foreach($customer_reviews as $review)
-         <x-home.customer-reviews :review="$review" />
+         <div class="flex h-full shrink-0 basis-full snap-start sm:basis-[calc((100%-1.75rem)/2)] lg:basis-[calc((100%-3.5rem)/3)]"
+            role="group" aria-roledescription="slide" aria-label="Review {{ $loop->iteration }} of {{ $loop->count }}">
+            <x-home.customer-reviews :review="$review" />
+         </div>
          @endforeach
+         </div>
       </div>
    </div>
 

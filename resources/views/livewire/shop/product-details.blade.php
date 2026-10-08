@@ -17,8 +17,8 @@
                     @endif
                     <button type="button" wire:click="addToWishlist({{$product->id}})" aria-label="Add Velocity Runner Pro to wishlist"
                         class="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-black/60 text-white transition-colors hover:bg-orange-500"><i
-                            class="fa-regular fa-heart"></i></button>
-                    <img src="{{$product->primaryImage->image_url}}" alt="Velocity Runner Pro running shoes"
+                            class="fa-{{ $product->isInWishlist ? 'solid' : 'regular' }} fa-heart"></i></button>
+                    <img src="{{$product->primaryImage->image_url ?? ''}}" alt="Velocity Runner Pro running shoes"
                         class="h-full w-full object-cover">
                 </div>
                 <div class="mt-3 grid grid-cols-4 gap-3">

@@ -5,15 +5,11 @@ namespace App\Livewire\Admin;
 use App\Models\Category;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use Livewire\WithFileUploads;
-use RuntimeException;
-use Throwable;
 
 #[Layout('layouts.app')]
 class CreateCategory extends Component
@@ -41,26 +37,15 @@ class CreateCategory extends Component
             'image' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:5120'],
         ]);
 
-        $imagePath = $validated['image']->storePublicly('images', 'public');
-
-        if ($imagePath === false) {
-            throw new RuntimeException('The category image could not be saved.');
-        }
-
-        try {
-            DB::transaction(function () use ($validated, $imagePath): void {
-                Category::query()->create([
-                    'title' => $validated['title'],
-                    'description' => $validated['description'],
-                    'slug' => $this->uniqueSlug($validated['title']),
-                    'image' => basename($imagePath),
-                ]);
-            });
-        } catch (Throwable $exception) {
-            Storage::disk('public')->delete($imagePath);
-
-            throw $exception;
-        }
+        $filename = time().'_'.$this->image->getClientOriginalName();
+        $storagePath = $this->image->storeAs('images', $filename, 'public');
+        $basename = basename($storagePath);
+        Category::create([
+            'title' => $validated['title'],
+            'description' => $validated['description'],
+            'slug' => $this->uniqueSlug($validated['title']),
+            'image' => $basename,
+        ]);
 
         session()->flash('alert', [
             'message' => 'Category created successfully.',

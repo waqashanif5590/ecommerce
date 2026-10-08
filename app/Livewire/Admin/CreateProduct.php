@@ -6,15 +6,11 @@ use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
-use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use Livewire\WithFileUploads;
-use RuntimeException;
-use Throwable;
 
 #[Layout('layouts.app')]
 class CreateProduct extends Component
@@ -35,13 +31,17 @@ class CreateProduct extends Component
 
     public bool $isNew = false;
 
-    public string $size = '';
+    public array $images = [];
 
-    public string $color = '';
+    public int|string $primaryImage = 0;
 
-    public int|string $quantity = '';
-
-    public ?TemporaryUploadedFile $image = null;
+    public array $variants = [
+        [
+            'size' => '',
+            'color' => '',
+            'quantity' => '',
+        ],
+    ];
 
     public function mount(): void
     {
@@ -60,49 +60,50 @@ class CreateProduct extends Component
             'totalDiscount' => ['nullable', 'integer', 'min:0', 'max:100'],
             'badge' => ['nullable', 'string', 'max:255'],
             'isNew' => ['boolean'],
-            'size' => ['required', 'string', 'max:255'],
-            'color' => ['required', 'string', 'max:255'],
-            'quantity' => ['required', 'integer', 'min:0'],
-            'image' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:5120'],
+            'variants' => ['required', 'array', 'min:1'],
+            'variants.*.size' => ['required', 'string', 'max:255'],
+            'variants.*.color' => ['required', 'string', 'max:255'],
+            'variants.*.quantity' => ['required', 'integer', 'min:1'],
+            'images' => ['required', 'array', 'min:1'],
+            'images.*' => ['image', 'mimes:jpg,jpeg,png,webp', 'max:5120'],
+            'primaryImage' => ['required', 'integer', Rule::in(array_keys($this->images))],
         ]);
 
-        $imagePath = $validated['image']->storePublicly('images', 'public');
-
-        if ($imagePath === false) {
-            throw new RuntimeException('The product image could not be saved.');
+        $product = Product::create([
+            'category_id' => $validated['categoryId'],
+            'name' => $validated['name'],
+            'slug' => $this->uniqueSlug($validated['name']),
+            'description' => $validated['description'],
+            'price' => $validated['price'],
+            'total_discount' => $validated['totalDiscount'],
+            'badge' => $validated['badge'],
+            'is_new' => $validated['isNew'],
+            'status' => true,
+        ]);
+        foreach ($validated['variants'] as $variant) {
+            $product->variants()->create([
+                'size' => $variant['size'],
+                'color' => $variant['color'],
+                'quantity' => $variant['quantity'],
+                'status' => true,
+            ]);
         }
 
-        try {
-            DB::transaction(function () use ($validated, $imagePath): void {
-                $product = Product::query()->create([
-                    'category_id' => $validated['categoryId'],
-                    'name' => $validated['name'],
-                    'slug' => $this->uniqueSlug($validated['name']),
-                    'description' => $validated['description'],
-                    'price' => $validated['price'],
-                    'total_discount' => $validated['totalDiscount'] ?: null,
-                    'badge' => $validated['badge'] ?: null,
-                    'is_new' => $validated['isNew'],
-                    'status' => true,
-                ]);
+        foreach ($validated['images'] as $index => $image) {
 
-                $product->images()->create([
-                    'image' => basename($imagePath),
-                    'is_primary' => true,
-                    'sort_order' => 0,
-                ]);
+            $imageName = time().'_'.uniqid().'.'.$image->getClientOriginalExtension();
 
-                $product->variants()->create([
-                    'size' => $validated['size'],
-                    'color' => $validated['color'],
-                    'quantity' => $validated['quantity'],
-                    'status' => true,
-                ]);
-            });
-        } catch (Throwable $exception) {
-            Storage::disk('public')->delete($imagePath);
+            $image->storeAs(
+                'images',
+                $imageName,
+                'public'
+            );
 
-            throw $exception;
+            $product->images()->create([
+                'image' => $imageName,
+                'is_primary' => $index === (int) $validated['primaryImage'],
+                'sort_order' => $index + 1,
+            ]);
         }
 
         session()->flash('alert', [
@@ -111,6 +112,43 @@ class CreateProduct extends Component
         ]);
 
         $this->redirectRoute('products', navigate: true);
+    }
+
+    public function addVariant(): void
+    {
+        $this->variants[] = [
+            'size' => '',
+            'color' => '',
+            'quantity' => '',
+        ];
+    }
+
+    public function removeVariant(int $index): void
+    {
+        if (count($this->variants) > 1) {
+            unset($this->variants[$index]);
+            $this->variants = array_values($this->variants);
+        }
+    }
+
+    public function removeImage(int $index): void
+    {
+        $this->authorizeAdmin();
+        abort_unless(array_key_exists($index, $this->images), 404);
+
+        unset($this->images[$index]);
+        $this->images = array_values($this->images);
+
+        if ($this->images === []) {
+            $this->primaryImage = 0;
+
+            return;
+        }
+
+        $primaryIndex = (int) $this->primaryImage;
+        $this->primaryImage = $index === $primaryIndex
+            ? 0
+            : $primaryIndex - (int) ($index < $primaryIndex);
     }
 
     public function render(): View
