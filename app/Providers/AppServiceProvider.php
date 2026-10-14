@@ -35,5 +35,8 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('view-order', function ($user, $order) {
             return $user->role === 'admin' || $user->id === $order->user_id;
         });
+        Gate::define('is_active', function (User $user) {
+            return $user->status == true;
+        });
     }
 }
