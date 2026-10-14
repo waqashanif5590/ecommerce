@@ -4,6 +4,7 @@ use App\Livewire\Admin\AdminDashboard;
 use App\Livewire\Admin\AllUsers;
 use App\Livewire\Admin\CreateCategory;
 use App\Livewire\Admin\CreateProduct;
+use App\Livewire\Admin\EditCategory;
 use App\Livewire\Admin\EditProduct;
 use App\Livewire\Admin\ReportsAnalytics;
 use App\Livewire\Admin\UserProfile;
@@ -35,13 +36,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/user-address', UserAddress::class)->name('user.address');
 
     // Admin routes
-    Route::get('/admin-dashboard', AdminDashboard::class)->name('admin.dashboard');
+    Route::get('/admin-dashboard', AdminDashboard::class)->name('admin.dashboard')->middleware('can:isAdmin');
     Route::get('/admin/reports-analytics', ReportsAnalytics::class)->name('admin.reports');
     Route::get('/admin/all-users', AllUsers::class)->name('all.users');
     Route::get('/user-profile/{customer}', UserProfile::class)->name('user.profile');
     Route::get('/admin/products/create', CreateProduct::class)->name('admin.products.create');
     Route::get('/admin/categories/create', CreateCategory::class)->name('admin.categories.create');
     Route::get('/edit-product/{product}', EditProduct::class)->name('editproduct');
+    Route::get('/edit-category/{category}', EditCategory::class)->name('editcategory');
 });
 
 Route::get('/categories', Categories::class)->name('categories');
@@ -50,4 +52,4 @@ Route::get('/products', Products::class)->name('products');
 Route::get('/products/{slug}', Products::class)->name('products.category');
 Route::get('/product-details/{slug}', ProductDetails::class)->name('product.details');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

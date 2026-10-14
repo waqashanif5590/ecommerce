@@ -119,8 +119,10 @@
             <div>
                 <p class="text-sm font-medium uppercase tracking-widest text-orange-400">Customer feedback</p>
                 <h2 class="mt-2 text-2xl font-bold text-white">Loved by runners</h2>
-            </div><button wire:click="$dispatch('open-modal', { name: 'write-review' })" class="text-sm font-medium text-orange-400 hover:text-orange-300">Write a review <i
-                    class="fa-solid fa-arrow-right ml-1"></i></button>
+            </div>
+            <button wire:click="$dispatch('open-modal', { name: 'write-review' })" class="text-sm font-medium text-orange-400 hover:text-orange-300">Write a review
+                <i class="fa-solid fa-arrow-right ml-1"></i>
+            </button>
         </div>
         <x-shop.product-reviews :product="$product" />
         <x-modals.write-review-modal name="write-review" :product="$product" />

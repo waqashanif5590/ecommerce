@@ -49,6 +49,16 @@ class User extends Authenticatable
         return $this->hasMany(Address::class);
     }
 
+    // Check if the user is an admin
+    public function isAdmin()
+    {
+        if ($this->role === 'admin') {
+            return true;
+        }
+
+        return false;
+    }
+
     public function getUserFirstNameAttribute()
     {
         $fullname = $this->name;

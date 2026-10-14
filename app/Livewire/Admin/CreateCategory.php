@@ -38,7 +38,7 @@ class CreateCategory extends Component
         ]);
 
         $filename = time().'_'.$this->image->getClientOriginalName();
-        $storagePath = $this->image->storeAs('images', $filename, 'public');
+        $storagePath = $this->image->storeAs('images/categories', $filename, 'public');
         $basename = basename($storagePath);
         Category::create([
             'title' => $validated['title'],

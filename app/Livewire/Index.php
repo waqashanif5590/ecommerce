@@ -13,6 +13,10 @@ use Livewire\Component;
 #[Layout('layouts.app')]
 class Index extends Component
 {
+    public string $review = '';
+
+    public ?int $rating = null;
+
     public function addToWishlist(int $productId): void
     {
         if (Auth::guest()) {
@@ -49,6 +53,35 @@ class Index extends Component
                 type: 'success'
             );
         }
+    }
+
+    public function submitCustomerReview(): void
+    {
+        if (Auth::guest()) {
+            $this->redirectRoute('login');
+
+            return;
+        }
+
+        $validated = $this->validate([
+            'review' => ['required', 'string', 'max:255'],
+            'rating' => ['required', 'integer', 'min:1', 'max:5'],
+        ]);
+
+        CustomerReview::create([
+            'user_id' => Auth::id(),
+            'rating' => $validated['rating'],
+            'comment' => $validated['review'],
+            'status' => true,
+        ]);
+
+        $this->reset('review', 'rating');
+        $this->dispatch('close-modal', name: 'write-review');
+        $this->dispatch(
+            'alert',
+            message: 'Review submitted successfully.',
+            type: 'success'
+        );
     }
 
     public function render()

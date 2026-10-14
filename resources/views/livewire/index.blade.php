@@ -1,7 +1,7 @@
 <div>
    <!-- hero section -->
    <x-home.hero-section />
-  
+
    <!-- Categories section -->
    <div class="categories mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
 
@@ -101,6 +101,10 @@
          role="region"
          aria-roledescription="carousel"
          aria-labelledby="customer-reviews-heading">
+         <button wire:click="$dispatch('open-modal', { name: 'write-review' })" class="mb-3 text-sm font-medium text-orange-400 hover:text-orange-300">Write a review
+            <i class="fa-solid fa-arrow-right ml-1"></i>
+         </button>
+         <x-modals.write-review-modal name="write-review" mode="platform" />
          @if($customer_reviews->count() > 1)
          <div class="pointer-events-none absolute inset-y-0 left-0 right-0 z-10 flex items-center justify-between">
             <button type="button" @click="move(-1)"
@@ -116,12 +120,12 @@
          </div>
          @endif
          <div x-ref="track" class="customer-review-container flex snap-x snap-mandatory gap-7 overflow-x-auto scroll-smooth px-12 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-         @foreach($customer_reviews as $review)
-         <div class="flex h-full shrink-0 basis-full snap-start sm:basis-[calc((100%-1.75rem)/2)] lg:basis-[calc((100%-3.5rem)/3)]"
-            role="group" aria-roledescription="slide" aria-label="Review {{ $loop->iteration }} of {{ $loop->count }}">
-            <x-home.customer-reviews :review="$review" />
-         </div>
-         @endforeach
+            @foreach($customer_reviews as $review)
+            <div class="flex h-full shrink-0 basis-full snap-start sm:basis-[calc((100%-1.75rem)/2)] lg:basis-[calc((100%-3.5rem)/3)]"
+               role="group" aria-roledescription="slide" aria-label="Review {{ $loop->iteration }} of {{ $loop->count }}">
+               <x-home.customer-reviews :review="$review" />
+            </div>
+            @endforeach
          </div>
       </div>
    </div>

@@ -1,4 +1,4 @@
-@props(['name'=>'write-review', 'product'=>null])
+@props(['name'=>'write-review', 'product'=>null, 'mode'=>'product'])
 <section
     x-data="{showReviewModal: false}"
     x-show="showReviewModal"
@@ -17,17 +17,23 @@
                 </div>
                 <p class="text-sm text-gray-500">All fields marked <span class="text-orange-400">*</span> are required.</p>
             </div>
-            <form wire:submit.prevent="submitReview({{ $product->id }})" class="mt-6 space-y-6">
+            <form
+                @if($mode === 'platform')
+                    wire:submit.prevent="submitCustomerReview"
+                @else
+                    wire:submit.prevent="submitReview({{ $product->id }})"
+                @endif
+                class="mt-6 space-y-6">
                 <div class="grid gap-5 md:grid-cols-2">
                     <div>
                         <label for="review" class="text-sm font-semibold text-gray-200">Write a Review <span class="text-orange-400">*</span></label>
-                        <textarea id="review" wire:model="review" placeholder="Share your experience with this product" class="mt-2 w-full rounded-xl border border-gray-700 bg-gray-950 px-4 py-3 text-sm text-white placeholder:text-gray-600 outline-none transition-colors focus:border-orange-400 focus:ring-2 focus:ring-orange-400/20"></textarea>
+                        <textarea id="review" wire:model="review" placeholder="{{ $mode === 'platform' ? 'Share your experience with our services' : 'Share your experience with this product' }}" class="mt-2 w-full rounded-xl border border-gray-700 bg-gray-950 px-4 py-3 text-sm text-white placeholder:text-gray-600 outline-none transition-colors focus:border-orange-400 focus:ring-2 focus:ring-orange-400/20"></textarea>
                         <x-input-error :messages="$errors->get('review')" class="mt-2" />
                     </div>
 
                     <div>
                         <label for="rating" class="text-sm font-semibold text-gray-200">Give a Rating <span class="text-orange-400">*</span></label>
-                        <div class="mt-2 flex items-center gap-2" role="radiogroup" aria-label="Product rating">
+                        <div class="mt-2 flex items-center gap-2" role="radiogroup" aria-label="{{ $mode === 'platform' ? 'Platform rating' : 'Product rating' }}">
                             @for ($i = 1; $i <= 5; $i++)
                                 <div>
                                     <input id="rating-{{ $i }}" type="radio" wire:model="rating" value="{{ $i }}" class="peer sr-only">

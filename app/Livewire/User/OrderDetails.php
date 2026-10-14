@@ -6,6 +6,7 @@ use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
+use Illuminate\Support\Facades\Gate;
 
 #[Layout('layouts.app')]
 class OrderDetails extends Component
@@ -31,12 +32,12 @@ class OrderDetails extends Component
 
     public function mount(Order $order): void
     {
-        // abort_unless($order->user_id === Auth::id(), 403);
         $this->order = $order->load([
             'items.product',
             'items.variant',
             'payment',
         ]);
+        Gate::authorize('view-order', $this->order);
     }
 
     public function isStatusCompleted(string $status): bool
@@ -85,7 +86,7 @@ class OrderDetails extends Component
 
     public function setStatus(string $status): void
     {
-        abort_unless(Auth::user()?->role === 'admin', 403);
+        Gate::authorize('isAdmin');
 
         abort_unless(in_array($status, self::STATUS_OPTIONS, true), 422);
 

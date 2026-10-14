@@ -37,6 +37,21 @@ test('non-admins cannot access the catalog creation pages', function () {
     $this->get(route('admin.categories.create'))->assertForbidden();
 });
 
+test('admins can open product creation with the selected category from a category card', function () {
+    $this->actingAs(User::factory()->create(['role' => 'admin']));
+    $category = Category::query()->create([
+        'title' => 'Trail Running',
+        'description' => 'Shoes for trail running.',
+        'slug' => 'trail-running',
+        'image' => 'trail.jpg',
+    ]);
+
+    $this->get(route('admin.products.create', ['categoryId' => $category->id]))
+        ->assertOk()
+        ->assertSee('<option value="'.$category->id.'" selected>', escape: false)
+        ->assertSee($category->title);
+});
+
 test('admins can create categories with a generated slug and uploaded image', function () {
     Storage::fake('public');
     $this->actingAs(User::factory()->create(['role' => 'admin']));

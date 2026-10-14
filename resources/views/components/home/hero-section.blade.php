@@ -40,7 +40,7 @@
     </div>
     <div
         class="hero-right flex relative min-h-[22rem] w-full overflow-hidden rounded-2xl sm:min-h-[30rem] lg:min-h-[36rem]">
-        <div class="absolute inset-0 bg-cover bg-center image-float" style="background: url('/images/landing_back.jpg') no-repeat center/cover;">
+        <div class="absolute inset-0 bg-cover bg-center image-float" style="background: url('/storage/images/logos/landing_back.jpg') no-repeat center/cover;">
         </div>
         <div class="relative z-10 py-6 px-1 flex justify-between items-center w-full">
             <div

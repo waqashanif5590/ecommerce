@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -19,6 +20,7 @@ class CreateProduct extends Component
 
     public string $name = '';
 
+    #[Url]
     public int|string $categoryId = '';
 
     public string $description = '';
@@ -94,7 +96,7 @@ class CreateProduct extends Component
             $imageName = time().'_'.uniqid().'.'.$image->getClientOriginalExtension();
 
             $image->storeAs(
-                'images',
+                'images/products',
                 $imageName,
                 'public'
             );

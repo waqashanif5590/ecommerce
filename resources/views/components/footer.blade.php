@@ -62,13 +62,13 @@
               <a href="" class="text-left text-gray-400 text-sm">Privacy</a>
               <a href="" class="text-left text-gray-400 text-sm">Terms</a>
               <div class="payment-methods flex items-center justify-center gap-1">
-                  <a href="" class="block w-8 h-5 p-1 rounded bg-blue-500"><img src="/images/vc_logo.png" alt=""
+                  <a href="" class="block w-8 h-5 p-1 rounded bg-blue-500"><img src="storage/images/logos/vc_logo.png" alt=""
                           class="w-full h-full"></a>
-                  <a href="" class="block w-8 h-5 p-1 rounded bg-green-500"><img src="/images/mc_logo.png" alt=""
+                  <a href="" class="block w-8 h-5 p-1 rounded bg-green-500"><img src="storage/images/logos/mc_logo.png" alt=""
                           class="w-full h-full"></a>
-                  <a href="" class="block w-8 h-5 p-1 rounded bg-white"><img src="/images/ep_logo.png" alt=""
+                  <a href="" class="block w-8 h-5 p-1 rounded bg-white"><img src="storage/images/logos/ep_logo.png" alt=""
                           class="w-full h-full"></a>
-                  <a href="" class="block w-8 h-5 p-1 rounded bg-orange-500"><img src="/images/pp_logo.png" alt=""
+                  <a href="" class="block w-8 h-5 p-1 rounded bg-orange-500"><img src="storage/images/logos/pp_logo.png" alt=""
                           class="w-full h-full"></a>
               </div>
           </div>

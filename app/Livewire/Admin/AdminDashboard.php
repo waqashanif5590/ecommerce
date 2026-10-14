@@ -24,10 +24,6 @@ class AdminDashboard extends Component
 
     public function render()
     {
-        $user = User::find(Auth::id());
-        if ($user->role != 'admin') {
-            $this->redirectRoute('/');
-        }
         $orders = Order::orderBy('created_at', 'desc')->take(3)->get();
         $totalOrders = Order::count();
         $pendingOrders = Order::where('status', 'pending')->count();

@@ -27,9 +27,9 @@ class ProductImage extends Model
 
     public function getImageUrlAttribute(): string
     {
-        $imagePath = str_starts_with($this->image, 'images/')
+        $imagePath = str_starts_with($this->image, 'images/products/')
             ? $this->image
-            : 'images/'.$this->image;
+            : 'images/products/'.$this->image;
 
         if (Storage::disk('public')->exists($imagePath)) {
             return Storage::disk('public')->url($imagePath);
